@@ -1,0 +1,1534 @@
+<!doctype html>
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+      name="viewport"
+    />
+    <meta content="mobile_tab" name="shell-type" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+      rel="stylesheet"
+    />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;800&amp;family=Space+Grotesk:wght@500;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      @layer base {
+        html,
+        body {
+          width: 100vw;
+          margin: 0;
+          padding: 0;
+          background-color: #fbf8ff;
+        }
+        body {
+          overscroll-behavior: none;
+        }
+        .pb-safe {
+          padding-bottom: env(safe-area-inset-bottom, 0px);
+        }
+        .pt-safe {
+          padding-top: env(safe-area-inset-top, 0px);
+        }
+        main > :first-child {
+          margin-top: 0 !important;
+        }
+        main > :last-child {
+          margin-bottom: 0 !important;
+        }
+      }
+      ::-webkit-scrollbar {
+        display: none;
+      }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "outline-variant": "#cdc7aa",
+              "on-background": "#1a1b24",
+              "inverse-surface": "#2f303a",
+              "on-primary": "#ffffff",
+              "secondary-fixed-dim": "#ffb3b3",
+              "on-tertiary-container": "#006aa8",
+              "secondary-fixed": "#ffdad9",
+              "error-container": "#ffdad6",
+              "surface-tint": "#6a5f00",
+              "surface-container": "#eeecfa",
+              "secondary-container": "#e6143e",
+              primary: "#6a5f00",
+              "primary-container": "#ffe600",
+              "on-secondary-fixed-variant": "#920022",
+              background: "#fbf8ff",
+              "on-tertiary-fixed": "#001d33",
+              tertiary: "#00629d",
+              "surface-container-high": "#e8e7f4",
+              "inverse-primary": "#dec800",
+              "inverse-on-surface": "#f1effd",
+              "on-tertiary-fixed-variant": "#004a77",
+              "primary-fixed-dim": "#dec800",
+              "on-tertiary": "#ffffff",
+              "on-primary-container": "#726600",
+              "surface-dim": "#dad9e6",
+              "on-secondary-container": "#fffbff",
+              "surface-container-lowest": "#ffffff",
+              "surface-container-low": "#f4f2ff",
+              "on-error": "#ffffff",
+              "tertiary-container": "#d2e6ff",
+              "surface-variant": "#e3e1ee",
+              outline: "#7c775f",
+              "on-primary-fixed-variant": "#504700",
+              "tertiary-fixed-dim": "#98cbff",
+              "tertiary-fixed": "#cfe5ff",
+              "on-surface-variant": "#4b4731",
+              "on-secondary-fixed": "#400009",
+              "surface-container-highest": "#e3e1ee",
+              error: "#ba1a1a",
+              surface: "#fbf8ff",
+              "on-surface": "#1a1b24",
+              "on-secondary": "#ffffff",
+              secondary: "#ba002e",
+              "primary-fixed": "#fde400",
+              "surface-bright": "#fbf8ff",
+              "on-error-container": "#93000a",
+              "on-primary-fixed": "#201c00",
+            },
+            borderRadius: {
+              DEFAULT: "0.125rem",
+              lg: "0.25rem",
+              xl: "0.5rem",
+              full: "0.75rem",
+            },
+            spacing: {
+              "space-xs": "0.25rem",
+              "space-xl": "2.25rem",
+              "space-md": "1rem",
+              margin: "1.25rem",
+              "space-sm": "0.5rem",
+              "space-lg": "1.5rem",
+              gutter: "1rem",
+            },
+            fontFamily: {
+              "headline-lg": ["Bricolage Grotesque"],
+              "headline-md": ["Bricolage Grotesque"],
+              "label-lg": ["Space Grotesk"],
+              "headline-xl-mobile": ["Bricolage Grotesque"],
+              "body-lg": ["Space Grotesk"],
+              "label-md": ["Space Grotesk"],
+              "label-sm": ["Space Grotesk"],
+              "headline-xl": ["Bricolage Grotesque"],
+              "headline-sm": ["Bricolage Grotesque"],
+              "body-md": ["Space Grotesk"],
+              "headline-lg-mobile": ["Bricolage Grotesque"],
+              "body-sm": ["Space Grotesk"],
+            },
+            fontSize: {
+              "headline-lg": [
+                "30px",
+                {
+                  lineHeight: "36px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "800",
+                },
+              ],
+              "headline-md": [
+                "22px",
+                { lineHeight: "28px", fontWeight: "700" },
+              ],
+              "label-lg": [
+                "15px",
+                {
+                  lineHeight: "20px",
+                  letterSpacing: "0.04em",
+                  fontWeight: "700",
+                },
+              ],
+              "headline-xl-mobile": [
+                "34px",
+                {
+                  lineHeight: "38px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "800",
+                },
+              ],
+              "body-lg": ["18px", { lineHeight: "26px", fontWeight: "500" }],
+              "label-md": [
+                "13px",
+                {
+                  lineHeight: "16px",
+                  letterSpacing: "0.06em",
+                  fontWeight: "700",
+                },
+              ],
+              "label-sm": [
+                "11px",
+                {
+                  lineHeight: "14px",
+                  letterSpacing: "0.08em",
+                  fontWeight: "700",
+                },
+              ],
+              "headline-xl": [
+                "44px",
+                {
+                  lineHeight: "48px",
+                  letterSpacing: "-0.03em",
+                  fontWeight: "800",
+                },
+              ],
+              "headline-sm": [
+                "18px",
+                { lineHeight: "24px", fontWeight: "700" },
+              ],
+              "body-md": ["16px", { lineHeight: "22px", fontWeight: "500" }],
+              "headline-lg-mobile": [
+                "26px",
+                {
+                  lineHeight: "32px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "800",
+                },
+              ],
+              "body-sm": ["14px", { lineHeight: "18px", fontWeight: "400" }],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-surface text-on-surface flex flex-col min-h-screen">
+    <header
+      class="fixed top-0 inset-x-0 z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] pt-safe"
+    >
+      <div class="h-16 px-margin flex items-center justify-between">
+        <div class="flex items-center gap-space-sm">
+          <img
+            alt="PowerPop Gym Logo"
+            class="h-8 w-auto object-contain"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuArl7twUr_DZ24LS8LA_q8K0bydpLK0kpwArHoKQTW9DRyudpOkFt23hyHPIoKCW2ryQpfIZCElbIJe7TKOAHTGNihtVdF6qGFOPi-Vn-JviXNFpS-Fuf0Zmq_EFtnEm-xA3HriT2rKlwR9D5Hkj7TUEssma-OnSU-t_wdx1Z98pizG8JGECaO6aMxUUTLbCUT7ErCTqj_apF8fPP7jVzqGLOGNSOeeCMDwHFn4SBQoLS5qud8UW69m8w"
+          />
+          <div class="flex flex-col">
+            <span
+              class="font-headline-sm text-headline-sm uppercase tracking-tight text-on-surface leading-none"
+              >POWER LIFT</span
+            ><span
+              class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider"
+              >Config Discos</span
+            >
+          </div>
+        </div>
+        <div class="flex items-center">
+          <img
+            alt="Profile"
+            class="w-8 h-8 rounded-full object-cover shadow-[0_1px_8px_rgba(0,0,0,0.04)]"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBn1tIcD1dAXbGoeafgTxy1-pQl3zHaBglW42YEeeqfnCkjHgmtGceciKzmBjkE9CPt4M41nd69puht33eRw1__9c66WLp1-EnvevGJTwKW70CFVfZ-hUncPWRXWWBmNKp98kwdKZ1aDfwRRimMU7Z_EhmjZHXbtz9G3H3Wq1-PZuj3jkHt3hXpVQB6P_SahkDUIOmQEpB8Hjky5hQf_fNLfYm_9DBD8UztzZRYHrnuNGcmxkr4fiM1Zw"
+          />
+        </div>
+      </div>
+    </header>
+    <main class="flex-1 flex flex-col relative w-full pt-16 pb-24 bg-surface">
+      <div
+        class="flex flex-col w-full px-margin pb-10 space-y-space-lg select-none"
+      >
+        <!-- Comic Ben-Day Dot Pattern Definition -->
+        <svg class="hidden">
+          <defs>
+            <pattern
+              height="8"
+              id="halftone-dots"
+              patternunits="userSpaceOnUse"
+              width="8"
+              x="0"
+              y="0"
+            >
+              <circle
+                cx="2"
+                cy="2"
+                fill="#12131C"
+                fill-opacity="0.12"
+                r="1.5"
+              ></circle>
+            </pattern>
+            <pattern
+              height="8"
+              id="halftone-dots-white"
+              patternunits="userSpaceOnUse"
+              width="8"
+              x="0"
+              y="0"
+            >
+              <circle
+                cx="2"
+                cy="2"
+                fill="#ffffff"
+                fill-opacity="0.25"
+                r="1.5"
+              ></circle>
+            </pattern>
+            <pattern
+              height="6"
+              id="halftone-dense"
+              patternunits="userSpaceOnUse"
+              width="6"
+              x="0"
+              y="0"
+            >
+              <circle
+                cx="1.5"
+                cy="1.5"
+                fill="#FFE600"
+                fill-opacity="0.3"
+                r="1.2"
+              ></circle>
+            </pattern>
+          </defs>
+        </svg>
+        <!-- BANNER CÓMIC DE IMPACTO / CABECERA -->
+        <section class="relative mt-2">
+          <!-- Pop Art Decorative Ray Burst (SVG Background) -->
+          <div
+            class="relative bg-surface-container-lowest rounded-xl p-space-md shadow-[4px_4px_0px_#12131C] overflow-hidden"
+            style="border: 2.5px solid #12131c"
+          >
+            <!-- Halftone pattern overlay -->
+            <div
+              class="absolute inset-0 pointer-events-none opacity-40"
+              style="
+                background-image: radial-gradient(#12131c 15%, transparent 16%);
+                background-size: 8px 8px;
+              "
+            ></div>
+            <div class="relative z-10 flex flex-col gap-space-sm">
+              <div class="flex items-center justify-between">
+                <!-- Mini Burst Tag -->
+                <div
+                  class="inline-flex items-center gap-1 bg-secondary-container text-on-secondary-container px-2 py-0.5 rounded -rotate-2 shadow-[2px_2px_0px_#12131C]"
+                  style="border: 2px solid #12131c"
+                >
+                  <span class="material-symbols-outlined text-base">bolt</span>
+                  <span
+                    class="font-label-sm text-label-sm uppercase tracking-widest font-black"
+                    >SETUP HERO</span
+                  >
+                </div>
+                <!-- Comic sound badge -->
+                <div
+                  class="bg-primary-container text-on-primary-fixed px-2.5 py-0.5 rounded rotate-3 shadow-[2px_2px_0px_#12131C]"
+                  style="border: 2px solid #12131c"
+                >
+                  <span
+                    class="font-headline-sm text-headline-sm tracking-tighter uppercase font-black"
+                    >¡CLANG!</span
+                  >
+                </div>
+              </div>
+              <!-- Speech Comic Cloud Banner -->
+              <div
+                class="relative bg-white p-3 rounded-lg mt-1"
+                style="
+                  border: 2.5px solid #12131c;
+                  box-shadow: 3px 3px 0px #12131c;
+                "
+              >
+                <h1
+                  class="font-headline-lg-mobile text-headline-lg-mobile uppercase text-on-surface leading-tight tracking-tight"
+                >
+                  ¡CONFIGURA TU
+                  <span
+                    class="bg-primary-container px-1 rounded inline-block -rotate-1 text-on-primary-fixed"
+                    >ARSENAL</span
+                  >
+                  DE HIERRO!
+                </h1>
+                <p
+                  class="font-body-sm text-body-sm text-on-surface-variant mt-1"
+                >
+                  Personaliza los discos, calibraciones y barras reales que
+                  tienes a mano.
+                </p>
+              </div>
+              <!-- TOGGLE UNIDAD BASE (KG / LBS) -->
+              <div
+                class="mt-2 pt-2 flex items-center justify-between"
+                style="border-top: 2px dashed #12131c"
+              >
+                <span
+                  class="font-label-md text-label-md uppercase text-on-surface tracking-wider font-bold flex items-center gap-1.5"
+                >
+                  <span class="material-symbols-outlined text-lg">scale</span>
+                  Unidad Principal:
+                </span>
+                <div
+                  class="inline-flex p-1 bg-surface-container rounded-lg shadow-[2px_2px_0px_#12131C]"
+                  style="border: 2px solid #12131c"
+                >
+                  <button
+                    class="px-4 py-1 rounded font-label-md text-label-md uppercase transition-all bg-primary-container text-on-primary-fixed font-black shadow-[2px_2px_0px_#12131C]"
+                    id="btn-kg"
+                    onclick="setUnit('kg')"
+                    style="border: 1.5px solid #12131c"
+                  >
+                    KG
+                  </button>
+                  <button
+                    class="px-4 py-1 rounded font-label-md text-label-md uppercase transition-all text-on-surface-variant hover:text-on-surface font-black"
+                    id="btn-lbs"
+                    onclick="setUnit('lbs')"
+                    style="border: 1.5px solid transparent"
+                  >
+                    LBS
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- PANEL 1: GESTIÓN DE DISCOS / PLATES MANAGER -->
+        <section class="flex flex-col space-y-space-sm">
+          <!-- Header de Viñeta Cómic -->
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <div
+                class="w-7 h-7 rounded bg-secondary flex items-center justify-center text-on-secondary shadow-[2px_2px_0px_#12131C]"
+                style="border: 2px solid #12131c"
+              >
+                <span class="material-symbols-outlined text-base"
+                  >radio_button_checked</span
+                >
+              </div>
+              <h2
+                class="font-headline-md text-headline-md uppercase text-on-surface tracking-tight"
+              >
+                1. DISCOS &amp; PLACAS
+              </h2>
+            </div>
+            <span
+              class="font-label-sm text-label-sm bg-surface-container-high px-2 py-0.5 rounded text-on-surface-variant uppercase font-bold"
+              style="border: 1.5px solid #12131c"
+            >
+              STOCK GYM
+            </span>
+          </div>
+          <!-- Contenedor Panel Discos -->
+          <div
+            class="bg-surface-container-lowest rounded-xl p-space-md shadow-[4px_4px_0px_#12131C] space-y-3"
+            style="border: 2.5px solid #12131c"
+          >
+            <!-- Disco 25 kg (Rojo) -->
+            <div
+              class="plate-row p-2.5 rounded-lg bg-surface-container-low transition-all"
+              style="border: 2px solid #12131c"
+            >
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <!-- Disco Icon con colorpicker táctil -->
+                  <button
+                    class="relative w-12 h-12 rounded-full flex items-center justify-center font-headline-sm text-headline-sm text-white font-black shadow-[2px_2px_0px_#12131C] active:translate-y-0.5 transition-transform"
+                    onclick="toggleColorMenu('25')"
+                    style="
+                      background-color: #e6143e;
+                      border: 2.5px solid #12131c;
+                    "
+                    title="Cambiar color"
+                  >
+                    25
+                    <span
+                      class="absolute -bottom-1 -right-1 w-4 h-4 bg-primary-container rounded-full flex items-center justify-center shadow-[1px_1px_0px_#12131C]"
+                      style="border: 1px solid #12131c"
+                    >
+                      <span
+                        class="material-symbols-outlined text-[10px] text-on-surface"
+                        >palette</span
+                      >
+                    </span>
+                  </button>
+                  <div>
+                    <div class="flex items-center gap-1.5">
+                      <span
+                        class="font-headline-sm text-headline-sm text-on-surface uppercase font-black"
+                        >25 KG</span
+                      >
+                      <span
+                        class="font-label-sm text-label-sm text-on-surface-variant"
+                        >(55 lbs)</span
+                      >
+                    </div>
+                    <p
+                      class="font-body-sm text-body-sm text-on-surface-variant"
+                    >
+                      Rojo Competición IWF
+                    </p>
+                  </div>
+                </div>
+                <!-- Stock & Switch -->
+                <div class="flex items-center gap-3">
+                  <div class="flex flex-col items-end">
+                    <span
+                      class="font-label-sm text-label-sm text-on-surface-variant uppercase"
+                      >Pares</span
+                    >
+                    <div
+                      class="flex items-center gap-1 bg-surface-container-lowest px-1.5 py-0.5 rounded shadow-[1px_1px_0px_#12131C]"
+                      style="border: 1.5px solid #12131c"
+                    >
+                      <button
+                        class="w-5 h-5 flex items-center justify-center font-bold text-on-surface active:bg-surface-container"
+                        onclick="changeStock('stock-25', -1)"
+                      >
+                        -
+                      </button>
+                      <span
+                        class="font-label-md text-label-md text-on-surface font-black px-1"
+                        id="stock-25"
+                        >4</span
+                      >
+                      <button
+                        class="w-5 h-5 flex items-center justify-center font-bold text-on-surface active:bg-surface-container"
+                        onclick="changeStock('stock-25', 1)"
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+                  <!-- Custom Comic Switch -->
+                  <label
+                    class="relative inline-flex items-center cursor-pointer"
+                  >
+                    <input checked="" class="sr-only peer" type="checkbox" />
+                    <div
+                      class="w-12 h-7 bg-surface-dim peer-focus:outline-none rounded-full peer peer-checked:bg-primary-container transition-all shadow-[2px_2px_0px_#12131C]"
+                      style="border: 2px solid #12131c"
+                    ></div>
+                    <div
+                      class="absolute left-1 top-1 bg-white w-5 h-5 rounded-full transition-all peer-checked:translate-x-5 shadow-[1px_1px_0px_#12131C]"
+                      style="border: 1.5px solid #12131c"
+                    ></div>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <!-- Disco 20 kg (Azul) -->
+            <div
+              class="plate-row p-2.5 rounded-lg bg-surface-container-low transition-all"
+              style="border: 2px solid #12131c"
+            >
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <button
+                    class="relative w-12 h-12 rounded-full flex items-center justify-center font-headline-sm text-headline-sm text-white font-black shadow-[2px_2px_0px_#12131C] active:translate-y-0.5 transition-transform"
+                    onclick="toggleColorMenu('20')"
+                    style="
+                      background-color: #00629d;
+                      border: 2.5px solid #12131c;
+                    "
+                    title="Cambiar color"
+                  >
+                    20
+                    <span
+                      class="absolute -bottom-1 -right-1 w-4 h-4 bg-primary-container rounded-full flex items-center justify-center shadow-[1px_1px_0px_#12131C]"
+                      style="border: 1px solid #12131c"
+                    >
+                      <span
+                        class="material-symbols-outlined text-[10px] text-on-surface"
+                        >palette</span
+                      >
+                    </span>
+                  </button>
+                  <div>
+                    <div class="flex items-center gap-1.5">
+                      <span
+                        class="font-headline-sm text-headline-sm text-on-surface uppercase font-black"
+                        >20 KG</span
+                      >
+                      <span
+                        class="font-label-sm text-label-sm text-on-surface-variant"
+                        >(44 lbs)</span
+                      >
+                    </div>
+                    <p
+                      class="font-body-sm text-body-sm text-on-surface-variant"
+                    >
+                      Azul Olímpico
+                    </p>
+                  </div>
+                </div>
+                <div class="flex items-center gap-3">
+                  <div class="flex flex-col items-end">
+                    <span
+                      class="font-label-sm text-label-sm text-on-surface-variant uppercase"
+                      >Pares</span
+                    >
+                    <div
+                      class="flex items-center gap-1 bg-surface-container-lowest px-1.5 py-0.5 rounded shadow-[1px_1px_0px_#12131C]"
+                      style="border: 1.5px solid #12131c"
+                    >
+                      <button
+                        class="w-5 h-5 flex items-center justify-center font-bold text-on-surface active:bg-surface-container"
+                        onclick="changeStock('stock-20', -1)"
+                      >
+                        -
+                      </button>
+                      <span
+                        class="font-label-md text-label-md text-on-surface font-black px-1"
+                        id="stock-20"
+                        >6</span
+                      >
+                      <button
+                        class="w-5 h-5 flex items-center justify-center font-bold text-on-surface active:bg-surface-container"
+                        onclick="changeStock('stock-20', 1)"
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+                  <label
+                    class="relative inline-flex items-center cursor-pointer"
+                  >
+                    <input checked="" class="sr-only peer" type="checkbox" />
+                    <div
+                      class="w-12 h-7 bg-surface-dim peer-focus:outline-none rounded-full peer peer-checked:bg-primary-container transition-all shadow-[2px_2px_0px_#12131C]"
+                      style="border: 2px solid #12131c"
+                    ></div>
+                    <div
+                      class="absolute left-1 top-1 bg-white w-5 h-5 rounded-full transition-all peer-checked:translate-x-5 shadow-[1px_1px_0px_#12131C]"
+                      style="border: 1.5px solid #12131c"
+                    ></div>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <!-- Disco 15 kg (Amarillo) -->
+            <div
+              class="plate-row p-2.5 rounded-lg bg-surface-container-low transition-all"
+              style="border: 2px solid #12131c"
+            >
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <button
+                    class="relative w-12 h-12 rounded-full flex items-center justify-center font-headline-sm text-headline-sm text-on-surface font-black shadow-[2px_2px_0px_#12131C] active:translate-y-0.5 transition-transform"
+                    onclick="toggleColorMenu('15')"
+                    style="
+                      background-color: #ffe600;
+                      border: 2.5px solid #12131c;
+                    "
+                    title="Cambiar color"
+                  >
+                    15
+                    <span
+                      class="absolute -bottom-1 -right-1 w-4 h-4 bg-white rounded-full flex items-center justify-center shadow-[1px_1px_0px_#12131C]"
+                      style="border: 1px solid #12131c"
+                    >
+                      <span
+                        class="material-symbols-outlined text-[10px] text-on-surface"
+                        >palette</span
+                      >
+                    </span>
+                  </button>
+                  <div>
+                    <div class="flex items-center gap-1.5">
+                      <span
+                        class="font-headline-sm text-headline-sm text-on-surface uppercase font-black"
+                        >15 KG</span
+                      >
+                      <span
+                        class="font-label-sm text-label-sm text-on-surface-variant"
+                        >(33 lbs)</span
+                      >
+                    </div>
+                    <p
+                      class="font-body-sm text-body-sm text-on-surface-variant"
+                    >
+                      Amarillo Estándar
+                    </p>
+                  </div>
+                </div>
+                <div class="flex items-center gap-3">
+                  <div class="flex flex-col items-end">
+                    <span
+                      class="font-label-sm text-label-sm text-on-surface-variant uppercase"
+                      >Pares</span
+                    >
+                    <div
+                      class="flex items-center gap-1 bg-surface-container-lowest px-1.5 py-0.5 rounded shadow-[1px_1px_0px_#12131C]"
+                      style="border: 1.5px solid #12131c"
+                    >
+                      <button
+                        class="w-5 h-5 flex items-center justify-center font-bold text-on-surface active:bg-surface-container"
+                        onclick="changeStock('stock-15', -1)"
+                      >
+                        -
+                      </button>
+                      <span
+                        class="font-label-md text-label-md text-on-surface font-black px-1"
+                        id="stock-15"
+                        >4</span
+                      >
+                      <button
+                        class="w-5 h-5 flex items-center justify-center font-bold text-on-surface active:bg-surface-container"
+                        onclick="changeStock('stock-15', 1)"
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+                  <label
+                    class="relative inline-flex items-center cursor-pointer"
+                  >
+                    <input checked="" class="sr-only peer" type="checkbox" />
+                    <div
+                      class="w-12 h-7 bg-surface-dim peer-focus:outline-none rounded-full peer peer-checked:bg-primary-container transition-all shadow-[2px_2px_0px_#12131C]"
+                      style="border: 2px solid #12131c"
+                    ></div>
+                    <div
+                      class="absolute left-1 top-1 bg-white w-5 h-5 rounded-full transition-all peer-checked:translate-x-5 shadow-[1px_1px_0px_#12131C]"
+                      style="border: 1.5px solid #12131c"
+                    ></div>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <!-- Disco 10 kg (Verde) -->
+            <div
+              class="plate-row p-2.5 rounded-lg bg-surface-container-low transition-all"
+              style="border: 2px solid #12131c"
+            >
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <button
+                    class="relative w-12 h-12 rounded-full flex items-center justify-center font-headline-sm text-headline-sm text-white font-black shadow-[2px_2px_0px_#12131C] active:translate-y-0.5 transition-transform"
+                    onclick="toggleColorMenu('10')"
+                    style="
+                      background-color: #2e7d32;
+                      border: 2.5px solid #12131c;
+                    "
+                    title="Cambiar color"
+                  >
+                    10
+                    <span
+                      class="absolute -bottom-1 -right-1 w-4 h-4 bg-primary-container rounded-full flex items-center justify-center shadow-[1px_1px_0px_#12131C]"
+                      style="border: 1px solid #12131c"
+                    >
+                      <span
+                        class="material-symbols-outlined text-[10px] text-on-surface"
+                        >palette</span
+                      >
+                    </span>
+                  </button>
+                  <div>
+                    <div class="flex items-center gap-1.5">
+                      <span
+                        class="font-headline-sm text-headline-sm text-on-surface uppercase font-black"
+                        >10 KG</span
+                      >
+                      <span
+                        class="font-label-sm text-label-sm text-on-surface-variant"
+                        >(22 lbs)</span
+                      >
+                    </div>
+                    <p
+                      class="font-body-sm text-body-sm text-on-surface-variant"
+                    >
+                      Verde Bumper
+                    </p>
+                  </div>
+                </div>
+                <div class="flex items-center gap-3">
+                  <div class="flex flex-col items-end">
+                    <span
+                      class="font-label-sm text-label-sm text-on-surface-variant uppercase"
+                      >Pares</span
+                    >
+                    <div
+                      class="flex items-center gap-1 bg-surface-container-lowest px-1.5 py-0.5 rounded shadow-[1px_1px_0px_#12131C]"
+                      style="border: 1.5px solid #12131c"
+                    >
+                      <button
+                        class="w-5 h-5 flex items-center justify-center font-bold text-on-surface active:bg-surface-container"
+                        onclick="changeStock('stock-10', -1)"
+                      >
+                        -
+                      </button>
+                      <span
+                        class="font-label-md text-label-md text-on-surface font-black px-1"
+                        id="stock-10"
+                        >4</span
+                      >
+                      <button
+                        class="w-5 h-5 flex items-center justify-center font-bold text-on-surface active:bg-surface-container"
+                        onclick="changeStock('stock-10', 1)"
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+                  <label
+                    class="relative inline-flex items-center cursor-pointer"
+                  >
+                    <input checked="" class="sr-only peer" type="checkbox" />
+                    <div
+                      class="w-12 h-7 bg-surface-dim peer-focus:outline-none rounded-full peer peer-checked:bg-primary-container transition-all shadow-[2px_2px_0px_#12131C]"
+                      style="border: 2px solid #12131c"
+                    ></div>
+                    <div
+                      class="absolute left-1 top-1 bg-white w-5 h-5 rounded-full transition-all peer-checked:translate-x-5 shadow-[1px_1px_0px_#12131C]"
+                      style="border: 1.5px solid #12131c"
+                    ></div>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <!-- Discos Ligeros / Fraccionales (5kg, 2.5kg, 1.25kg, 0.5kg) -->
+            <div class="pt-2" style="border-top: 1.5px dashed #12131c">
+              <span
+                class="font-label-md text-label-md uppercase text-on-surface font-black tracking-wide block mb-2"
+              >
+                Discos Pequeños &amp; Fraccionales:
+              </span>
+              <div class="grid grid-cols-2 gap-2">
+                <!-- 5 kg -->
+                <div
+                  class="flex items-center justify-between p-2 rounded bg-surface-container-lowest"
+                  style="
+                    border: 1.5px solid #12131c;
+                    box-shadow: 2px 2px 0px #12131c;
+                  "
+                >
+                  <div class="flex items-center gap-2">
+                    <div
+                      class="w-6 h-6 rounded-full bg-surface-container-lowest text-on-surface font-black flex items-center justify-center text-xs"
+                      style="border: 2px solid #12131c"
+                    >
+                      5
+                    </div>
+                    <span class="font-label-md text-label-md font-bold"
+                      >5.0 KG</span
+                    >
+                  </div>
+                  <input
+                    checked=""
+                    class="w-5 h-5 accent-primary cursor-pointer"
+                    style="accent-color: #ffe600"
+                    type="checkbox"
+                  />
+                </div>
+                <!-- 2.5 kg -->
+                <div
+                  class="flex items-center justify-between p-2 rounded bg-surface-container-lowest"
+                  style="
+                    border: 1.5px solid #12131c;
+                    box-shadow: 2px 2px 0px #12131c;
+                  "
+                >
+                  <div class="flex items-center gap-2">
+                    <div
+                      class="w-6 h-6 rounded-full bg-inverse-surface text-inverse-on-surface font-black flex items-center justify-center text-xs"
+                      style="border: 2px solid #12131c"
+                    >
+                      2.5
+                    </div>
+                    <span class="font-label-md text-label-md font-bold"
+                      >2.5 KG</span
+                    >
+                  </div>
+                  <input
+                    checked=""
+                    class="w-5 h-5 cursor-pointer"
+                    style="accent-color: #ffe600"
+                    type="checkbox"
+                  />
+                </div>
+                <!-- 1.25 kg -->
+                <div
+                  class="flex items-center justify-between p-2 rounded bg-surface-container-lowest"
+                  style="
+                    border: 1.5px solid #12131c;
+                    box-shadow: 2px 2px 0px #12131c;
+                  "
+                >
+                  <div class="flex items-center gap-2">
+                    <div
+                      class="w-6 h-6 rounded-full bg-outline-variant text-on-surface font-black flex items-center justify-center text-[10px]"
+                      style="border: 2px solid #12131c"
+                    >
+                      1.25
+                    </div>
+                    <span class="font-label-md text-label-md font-bold"
+                      >1.25 KG</span
+                    >
+                  </div>
+                  <input
+                    checked=""
+                    class="w-5 h-5 cursor-pointer"
+                    style="accent-color: #ffe600"
+                    type="checkbox"
+                  />
+                </div>
+                <!-- 0.5 kg -->
+                <div
+                  class="flex items-center justify-between p-2 rounded bg-surface-container-lowest"
+                  style="
+                    border: 1.5px solid #12131c;
+                    box-shadow: 2px 2px 0px #12131c;
+                  "
+                >
+                  <div class="flex items-center gap-2">
+                    <div
+                      class="w-6 h-6 rounded-full bg-secondary-fixed text-on-secondary-fixed font-black flex items-center justify-center text-[10px]"
+                      style="border: 2px solid #12131c"
+                    >
+                      0.5
+                    </div>
+                    <span class="font-label-md text-label-md font-bold"
+                      >0.50 KG</span
+                    >
+                  </div>
+                  <input
+                    checked=""
+                    class="w-5 h-5 cursor-pointer"
+                    style="accent-color: #ffe600"
+                    type="checkbox"
+                  />
+                </div>
+              </div>
+            </div>
+            <!-- Calibración fina / Custom Weight Note -->
+            <button
+              class="w-full mt-2 py-2 px-3 rounded-lg bg-surface text-on-surface font-label-md text-label-md uppercase tracking-wider flex items-center justify-center gap-2 active:translate-y-0.5 shadow-[2px_2px_0px_#12131C]"
+              onclick="toggleModal('calibracion-modal')"
+              style="border: 2px solid #12131c"
+            >
+              <span class="material-symbols-outlined text-base">edit_note</span>
+              Calibrar pesos reales de disco (ej: 20.4 kg)
+            </button>
+          </div>
+        </section>
+        <!-- PANEL 2: BARRAS DISPONIBLES EN EL GIMNASIO -->
+        <section class="flex flex-col space-y-space-sm">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <div
+                class="w-7 h-7 rounded bg-primary-container flex items-center justify-center text-on-primary-fixed shadow-[2px_2px_0px_#12131C]"
+                style="border: 2px solid #12131c"
+              >
+                <span class="material-symbols-outlined text-base"
+                  >fitness_center</span
+                >
+              </div>
+              <h2
+                class="font-headline-md text-headline-md uppercase text-on-surface tracking-tight"
+              >
+                2. BARRAS DE TU GYM
+              </h2>
+            </div>
+            <span
+              class="font-label-sm text-label-sm bg-tertiary-container px-2 py-0.5 rounded text-on-tertiary-container uppercase font-bold"
+              style="border: 1.5px solid #12131c"
+            >
+              5 ACTIVAS
+            </span>
+          </div>
+          <div
+            class="bg-surface-container-lowest rounded-xl p-space-md shadow-[4px_4px_0px_#12131C] space-y-2.5"
+            style="border: 2.5px solid #12131c"
+          >
+            <!-- Barra 1: Olímpica Estándar -->
+            <div
+              class="flex items-center justify-between p-2.5 rounded-lg bg-surface-container-low"
+              style="border: 2px solid #12131c"
+            >
+              <div class="flex items-center gap-2.5 min-w-0">
+                <div
+                  class="w-8 h-8 rounded bg-surface-container-highest flex items-center justify-center text-on-surface shrink-0"
+                  style="border: 1.5px solid #12131c"
+                >
+                  <span class="material-symbols-outlined text-lg"
+                    >straighten</span
+                  >
+                </div>
+                <div class="min-w-0">
+                  <h3
+                    class="font-headline-sm text-headline-sm uppercase text-on-surface truncate"
+                  >
+                    Barra Olímpica Estándar
+                  </h3>
+                  <span
+                    class="font-label-sm text-label-sm text-on-surface-variant font-bold"
+                    >20.0 KG · (44 LBS) · 2.20M</span
+                  >
+                </div>
+              </div>
+              <input
+                checked=""
+                class="w-6 h-6 cursor-pointer ml-2 shrink-0"
+                style="accent-color: #ffe600"
+                type="checkbox"
+              />
+            </div>
+            <!-- Barra 2: Olímpica Mujer -->
+            <div
+              class="flex items-center justify-between p-2.5 rounded-lg bg-surface-container-low"
+              style="border: 2px solid #12131c"
+            >
+              <div class="flex items-center gap-2.5 min-w-0">
+                <div
+                  class="w-8 h-8 rounded bg-surface-container-highest flex items-center justify-center text-on-surface shrink-0"
+                  style="border: 1.5px solid #12131c"
+                >
+                  <span class="material-symbols-outlined text-lg"
+                    >straighten</span
+                  >
+                </div>
+                <div class="min-w-0">
+                  <h3
+                    class="font-headline-sm text-headline-sm uppercase text-on-surface truncate"
+                  >
+                    Barra Olímpica Femenina
+                  </h3>
+                  <span
+                    class="font-label-sm text-label-sm text-on-surface-variant font-bold"
+                    >15.0 KG · (33 LBS) · 2.01M</span
+                  >
+                </div>
+              </div>
+              <input
+                checked=""
+                class="w-6 h-6 cursor-pointer ml-2 shrink-0"
+                style="accent-color: #ffe600"
+                type="checkbox"
+              />
+            </div>
+            <!-- Barra 3: Barra Z Curl -->
+            <div
+              class="flex items-center justify-between p-2.5 rounded-lg bg-surface-container-low"
+              style="border: 2px solid #12131c"
+            >
+              <div class="flex items-center gap-2.5 min-w-0">
+                <div
+                  class="w-8 h-8 rounded bg-surface-container-highest flex items-center justify-center text-on-surface shrink-0"
+                  style="border: 1.5px solid #12131c"
+                >
+                  <span class="material-symbols-outlined text-lg"
+                    >show_chart</span
+                  >
+                </div>
+                <div class="min-w-0">
+                  <h3
+                    class="font-headline-sm text-headline-sm uppercase text-on-surface truncate"
+                  >
+                    Barra Z (EZ Curl)
+                  </h3>
+                  <span
+                    class="font-label-sm text-label-sm text-on-surface-variant font-bold"
+                    >10.0 KG · (22 LBS)</span
+                  >
+                </div>
+              </div>
+              <input
+                checked=""
+                class="w-6 h-6 cursor-pointer ml-2 shrink-0"
+                style="accent-color: #ffe600"
+                type="checkbox"
+              />
+            </div>
+            <!-- Barra 4: Barra Romana / Tríceps -->
+            <div
+              class="flex items-center justify-between p-2.5 rounded-lg bg-surface-container-low"
+              style="border: 2px solid #12131c"
+            >
+              <div class="flex items-center gap-2.5 min-w-0">
+                <div
+                  class="w-8 h-8 rounded bg-surface-container-highest flex items-center justify-center text-on-surface shrink-0"
+                  style="border: 1.5px solid #12131c"
+                >
+                  <span class="material-symbols-outlined text-lg"
+                    >view_carousel</span
+                  >
+                </div>
+                <div class="min-w-0">
+                  <h3
+                    class="font-headline-sm text-headline-sm uppercase text-on-surface truncate"
+                  >
+                    Barra Romana (Tríceps)
+                  </h3>
+                  <span
+                    class="font-label-sm text-label-sm text-on-surface-variant font-bold"
+                    >12.0 KG · (26.5 LBS)</span
+                  >
+                </div>
+              </div>
+              <input
+                class="w-6 h-6 cursor-pointer ml-2 shrink-0"
+                style="accent-color: #ffe600"
+                type="checkbox"
+              />
+            </div>
+            <!-- Barra 5: Trap Bar / Hexagonal -->
+            <div
+              class="flex items-center justify-between p-2.5 rounded-lg bg-surface-container-low"
+              style="border: 2px solid #12131c"
+            >
+              <div class="flex items-center gap-2.5 min-w-0">
+                <div
+                  class="w-8 h-8 rounded bg-surface-container-highest flex items-center justify-center text-on-surface shrink-0"
+                  style="border: 1.5px solid #12131c"
+                >
+                  <span class="material-symbols-outlined text-lg">hexagon</span>
+                </div>
+                <div class="min-w-0">
+                  <h3
+                    class="font-headline-sm text-headline-sm uppercase text-on-surface truncate"
+                  >
+                    Barra Hexagonal / Trap Bar
+                  </h3>
+                  <span
+                    class="font-label-sm text-label-sm text-on-surface-variant font-bold"
+                    >25.0 KG · (55 LBS)</span
+                  >
+                </div>
+              </div>
+              <input
+                checked=""
+                class="w-6 h-6 cursor-pointer ml-2 shrink-0"
+                style="accent-color: #ffe600"
+                type="checkbox"
+              />
+            </div>
+            <!-- Botón Añadir Barra Personalizada -->
+            <button
+              class="w-full py-3 px-4 rounded-lg bg-tertiary-container text-on-tertiary-container font-headline-sm text-headline-sm uppercase tracking-wide flex items-center justify-center gap-2 mt-2 shadow-[3px_3px_0px_#12131C] active:translate-x-0.5 active:translate-y-0.5 active:shadow-[1px_1px_0px_#12131C] transition-all"
+              onclick="toggleModal('barra-modal')"
+              style="border: 2px solid #12131c"
+            >
+              <span class="material-symbols-outlined text-xl font-black"
+                >add_circle</span
+              >
+              + Añadir Barra Personalizada
+            </button>
+          </div>
+        </section>
+        <!-- PANEL 3: INCREMENTOS EN POLEAS (CABLE STACKS) -->
+        <section class="flex flex-col space-y-space-sm">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <div
+                class="w-7 h-7 rounded bg-tertiary flex items-center justify-center text-on-tertiary shadow-[2px_2px_0px_#12131C]"
+                style="border: 2px solid #12131c"
+              >
+                <span class="material-symbols-outlined text-base">cable</span>
+              </div>
+              <h2
+                class="font-headline-md text-headline-md uppercase text-on-surface tracking-tight"
+              >
+                3. POLEAS &amp; CABLES
+              </h2>
+            </div>
+            <span
+              class="font-label-sm text-label-sm bg-primary-container px-2 py-0.5 rounded text-on-primary-fixed uppercase font-black"
+              style="border: 1.5px solid #12131c"
+            >
+              RATIO
+            </span>
+          </div>
+          <div
+            class="bg-surface-container-lowest rounded-xl p-space-md shadow-[4px_4px_0px_#12131C] space-y-3"
+            style="border: 2.5px solid #12131c"
+          >
+            <!-- Incremento por placa de cable -->
+            <div>
+              <label
+                class="block font-label-md text-label-md uppercase text-on-surface font-black mb-1"
+              >
+                Salto por Placa en la Torre:
+              </label>
+              <div class="grid grid-cols-3 gap-2">
+                <button
+                  class="py-2 rounded font-label-md text-label-md font-black uppercase bg-primary-container text-on-primary-fixed shadow-[2px_2px_0px_#12131C]"
+                  style="border: 2px solid #12131c"
+                >
+                  5.0 KG
+                </button>
+                <button
+                  class="py-2 rounded font-label-md text-label-md font-bold uppercase bg-surface-container text-on-surface-variant hover:text-on-surface"
+                  style="border: 2px solid #12131c"
+                >
+                  4.5 KG / 10 LBS
+                </button>
+                <button
+                  class="py-2 rounded font-label-md text-label-md font-bold uppercase bg-surface-container text-on-surface-variant hover:text-on-surface"
+                  style="border: 2px solid #12131c"
+                >
+                  2.5 KG
+                </button>
+              </div>
+            </div>
+            <!-- Ratio Multiplicador Polea -->
+            <div class="pt-2" style="border-top: 1.5px dashed #12131c">
+              <div class="flex items-center justify-between">
+                <div>
+                  <span
+                    class="font-label-md text-label-md uppercase text-on-surface font-black block"
+                    >Ratio de Carga / Polea</span
+                  >
+                  <span
+                    class="font-body-sm text-body-sm text-on-surface-variant"
+                    >Multiplicador de resistencia real</span
+                  >
+                </div>
+                <div class="flex gap-1.5">
+                  <button
+                    class="px-3 py-1 bg-surface-container-lowest font-label-md text-label-md font-black rounded shadow-[2px_2px_0px_#12131C]"
+                    style="border: 2px solid #12131c"
+                  >
+                    1:1
+                  </button>
+                  <button
+                    class="px-3 py-1 bg-primary-container text-on-primary-fixed font-label-md text-label-md font-black rounded shadow-[2px_2px_0px_#12131C]"
+                    style="border: 2px solid #12131c"
+                  >
+                    2:1 (½ Peso)
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- ACCIONES INFERIORES: GUARDAR Y RESET -->
+        <section class="flex flex-col space-y-3 pt-2">
+          <!-- Botón Principal "GUARDAR CAMBIOS" -->
+          <button
+            class="w-full h-14 bg-primary-container text-on-primary-fixed rounded-lg font-headline-lg-mobile text-headline-lg-mobile uppercase tracking-wider font-black flex items-center justify-center gap-2 shadow-[4px_4px_0px_#12131C] active:translate-x-1 active:translate-y-1 active:shadow-[2px_2px_0px_#12131C] transition-all"
+            onclick="triggerSaveCelebration()"
+            style="border: 3px solid #12131c"
+          >
+            <span class="material-symbols-outlined text-3xl font-black"
+              >save</span
+            >
+            ¡GUARDAR CAMBIOS!
+          </button>
+          <!-- Botón Secundario: Reset IWF Estándar -->
+          <button
+            class="w-full py-2.5 bg-surface-container-lowest text-on-surface font-label-md text-label-md uppercase tracking-wider flex items-center justify-center gap-1.5 rounded-lg active:translate-y-0.5 shadow-[2px_2px_0px_#12131C]"
+            onclick="resetDefaults()"
+            style="border: 2px solid #12131c"
+          >
+            <span class="material-symbols-outlined text-base">restart_alt</span>
+            Restablecer Valores de Fábrica IWF
+          </button>
+        </section>
+        <!-- MODAL: AÑADIR BARRA PERSONALIZADA (POP-UP CÓMIC) -->
+        <div
+          class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-xs hidden"
+          id="barra-modal"
+        >
+          <div
+            class="relative w-full max-w-sm bg-white rounded-xl p-space-md shadow-[6px_6px_0px_#12131C]"
+            style="border: 3px solid #12131c"
+          >
+            <!-- Close Comic Badge -->
+            <button
+              class="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-secondary text-white font-black flex items-center justify-center shadow-[2px_2px_0px_#12131C] active:scale-95"
+              onclick="toggleModal('barra-modal')"
+              style="border: 2px solid #12131c"
+            >
+              ✕
+            </button>
+            <div class="flex items-center gap-2 mb-3">
+              <span class="material-symbols-outlined text-2xl text-on-surface"
+                >fitness_center</span
+              >
+              <h3
+                class="font-headline-sm text-headline-sm uppercase text-on-surface font-black"
+              >
+                NUEVA BARRA CUSTOM
+              </h3>
+            </div>
+            <div class="space-y-3">
+              <div>
+                <label
+                  class="font-label-sm text-label-sm uppercase font-bold text-on-surface block mb-1"
+                  >Nombre de la barra:</label
+                >
+                <input
+                  class="w-full p-2.5 rounded bg-surface-container-low font-body-md text-body-md text-on-surface focus:outline-none focus:bg-white"
+                  placeholder="Ej: Barra Multipower Smith, Safety Squat"
+                  style="border: 2px solid #12131c"
+                  type="text"
+                />
+              </div>
+              <div class="grid grid-cols-2 gap-2">
+                <div>
+                  <label
+                    class="font-label-sm text-label-sm uppercase font-bold text-on-surface block mb-1"
+                    >Peso en KG:</label
+                  >
+                  <input
+                    class="w-full p-2.5 rounded bg-surface-container-low font-headline-sm text-headline-sm text-on-surface focus:outline-none focus:bg-white"
+                    placeholder="20.0"
+                    style="border: 2px solid #12131c"
+                    type="number"
+                  />
+                </div>
+                <div>
+                  <label
+                    class="font-label-sm text-label-sm uppercase font-bold text-on-surface block mb-1"
+                    >Equivalente LBS:</label
+                  >
+                  <input
+                    class="w-full p-2.5 rounded bg-surface-container-low font-headline-sm text-headline-sm text-on-surface focus:outline-none focus:bg-white"
+                    placeholder="44.0"
+                    style="border: 2px solid #12131c"
+                    type="number"
+                  />
+                </div>
+              </div>
+              <button
+                class="w-full py-3 mt-2 bg-primary-container text-on-primary-fixed font-headline-sm text-headline-sm uppercase rounded shadow-[3px_3px_0px_#12131C] active:translate-y-0.5"
+                onclick="toggleModal('barra-modal')"
+                style="border: 2px solid #12131c"
+              >
+                ¡AÑADIR A LA LISTA!
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- MODAL: CALIBRACIÓN FINA DE PESOS -->
+        <div
+          class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-xs hidden"
+          id="calibracion-modal"
+        >
+          <div
+            class="relative w-full max-w-sm bg-white rounded-xl p-space-md shadow-[6px_6px_0px_#12131C]"
+            style="border: 3px solid #12131c"
+          >
+            <button
+              class="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-secondary text-white font-black flex items-center justify-center shadow-[2px_2px_0px_#12131C] active:scale-95"
+              onclick="toggleModal('calibracion-modal')"
+              style="border: 2px solid #12131c"
+            >
+              ✕
+            </button>
+            <div class="flex items-center gap-2 mb-2">
+              <span class="material-symbols-outlined text-2xl text-on-surface"
+                >tune</span
+              >
+              <h3
+                class="font-headline-sm text-headline-sm uppercase text-on-surface font-black"
+              >
+                CALIBRAR DISCOS REALES
+              </h3>
+            </div>
+            <p class="font-body-sm text-body-sm text-on-surface-variant mb-3">
+              Introduce el peso verificado en báscula de tus discos para
+              cálculos ultra precisos de 1RM:
+            </p>
+            <div class="space-y-2 max-h-56 overflow-y-auto pr-1">
+              <div
+                class="flex items-center justify-between p-1.5 bg-surface-container-low rounded"
+                style="border: 1.5px solid #12131c"
+              >
+                <span class="font-label-md text-label-md font-bold"
+                  >Disco Nominal 25 KG:</span
+                >
+                <input
+                  class="w-24 text-right p-1 font-headline-sm text-headline-sm bg-white rounded"
+                  style="border: 1.5px solid #12131c"
+                  type="text"
+                  value="25.2 kg"
+                />
+              </div>
+              <div
+                class="flex items-center justify-between p-1.5 bg-surface-container-low rounded"
+                style="border: 1.5px solid #12131c"
+              >
+                <span class="font-label-md text-label-md font-bold"
+                  >Disco Nominal 20 KG:</span
+                >
+                <input
+                  class="w-24 text-right p-1 font-headline-sm text-headline-sm bg-white rounded"
+                  style="border: 1.5px solid #12131c"
+                  type="text"
+                  value="20.1 kg"
+                />
+              </div>
+              <div
+                class="flex items-center justify-between p-1.5 bg-surface-container-low rounded"
+                style="border: 1.5px solid #12131c"
+              >
+                <span class="font-label-md text-label-md font-bold"
+                  >Barra Olímpica 20 KG:</span
+                >
+                <input
+                  class="w-24 text-right p-1 font-headline-sm text-headline-sm bg-white rounded"
+                  style="border: 1.5px solid #12131c"
+                  type="text"
+                  value="20.0 kg"
+                />
+              </div>
+            </div>
+            <button
+              class="w-full py-2.5 mt-3 bg-secondary-container text-on-secondary-container font-headline-sm text-headline-sm uppercase rounded shadow-[3px_3px_0px_#12131C]"
+              onclick="toggleModal('calibracion-modal')"
+              style="border: 2px solid #12131c"
+            >
+              GUARDAR CALIBRACIÓN
+            </button>
+          </div>
+        </div>
+        <!-- MODAL / POP-UP CELEBRACIÓN CÓMIC: "¡BOOM! ¡GUARDADO!" -->
+        <div
+          class="fixed inset-x-4 top-20 z-50 flex justify-center pointer-events-none transition-all duration-300 opacity-0 -translate-y-4"
+          id="save-toast"
+        >
+          <div
+            class="relative bg-primary-container text-on-primary-fixed px-5 py-3 rounded-xl shadow-[6px_6px_0px_#12131C] -rotate-2 flex items-center gap-3"
+            style="border: 3px solid #12131c"
+          >
+            <div
+              class="w-9 h-9 bg-white rounded-full flex items-center justify-center font-black text-xl shadow-[1px_1px_0px_#12131C]"
+              style="border: 2px solid #12131c"
+            >
+              ✓
+            </div>
+            <div>
+              <p
+                class="font-headline-sm text-headline-sm uppercase font-black leading-none"
+              >
+                ¡POW! CONFIGURACIÓN ACTIVA
+              </p>
+              <p
+                class="font-label-sm text-label-sm uppercase tracking-wider text-on-primary-container font-bold"
+              >
+                Tu arsenal está listo para calcular cargas
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- INTERACTIVE SCRIPTS -->
+      <script>
+        function setUnit(unit) {
+          const btnKg = document.getElementById("btn-kg");
+          const btnLbs = document.getElementById("btn-lbs");
+          if (unit === "kg") {
+            btnKg.className =
+              "px-4 py-1 rounded font-label-md text-label-md uppercase transition-all bg-primary-container text-on-primary-fixed font-black shadow-[2px_2px_0px_#12131C]";
+            btnKg.style.border = "1.5px solid #12131C";
+            btnLbs.className =
+              "px-4 py-1 rounded font-label-md text-label-md uppercase transition-all text-on-surface-variant hover:text-on-surface font-black";
+            btnLbs.style.border = "1.5px solid transparent";
+            btnLbs.style.boxShadow = "none";
+          } else {
+            btnLbs.className =
+              "px-4 py-1 rounded font-label-md text-label-md uppercase transition-all bg-primary-container text-on-primary-fixed font-black shadow-[2px_2px_0px_#12131C]";
+            btnLbs.style.border = "1.5px solid #12131C";
+            btnKg.className =
+              "px-4 py-1 rounded font-label-md text-label-md uppercase transition-all text-on-surface-variant hover:text-on-surface font-black";
+            btnKg.style.border = "1.5px solid transparent";
+            btnKg.style.boxShadow = "none";
+          }
+        }
+
+        function changeStock(id, delta) {
+          const el = document.getElementById(id);
+          if (!el) return;
+          let current = parseInt(el.textContent, 10) || 0;
+          current = Math.max(0, current + delta);
+          el.textContent = current;
+        }
+
+        function toggleModal(modalId) {
+          const modal = document.getElementById(modalId);
+          if (modal) {
+            modal.classList.toggle("hidden");
+          }
+        }
+
+        function triggerSaveCelebration() {
+          const toast = document.getElementById("save-toast");
+          if (!toast) return;
+          toast.classList.remove("opacity-0", "-translate-y-4");
+          toast.classList.add("opacity-100", "translate-y-0");
+
+          setTimeout(() => {
+            toast.classList.remove("opacity-100", "translate-y-0");
+            toast.classList.add("opacity-0", "-translate-y-4");
+          }, 2400);
+        }
+
+        function resetDefaults() {
+          document.getElementById("stock-25").textContent = "4";
+          document.getElementById("stock-20").textContent = "6";
+          document.getElementById("stock-15").textContent = "4";
+          document.getElementById("stock-10").textContent = "4";
+          setUnit("kg");
+          triggerSaveCelebration();
+        }
+
+        function toggleColorMenu(plateWeight) {
+          // Microinteracción para confirmar selección táctil
+          const eventEl = event.currentTarget;
+          eventEl.classList.add("scale-110");
+          setTimeout(() => eventEl.classList.remove("scale-110"), 150);
+        }
+      </script>
+    </main>
+    <nav
+      class="fixed bottom-0 inset-x-0 z-50 pb-safe bg-surface/90 backdrop-blur-xl shadow-[0_-2px_12px_rgba(0,0,0,0.06)]"
+      data-active-classes="bg-primary-container text-on-primary-container shadow-[0_1px_8px_rgba(0,0,0,0.04)] scale-105"
+    >
+      <div class="flex justify-around items-center h-20 px-space-xs">
+        <a
+          class="flex flex-col items-center justify-center gap-space-xs min-w-[72px] h-14 rounded-lg text-on-surface-variant transition-all"
+          data-path="calculadora-carga"
+          href="#"
+          ><span class="material-symbols-outlined text-2xl">fitness_center</span
+          ><span
+            class="font-label-sm text-label-sm uppercase tracking-wider text-center leading-none"
+            >Carga</span
+          ></a
+        ><a
+          aria-current="page"
+          class="flex flex-col items-center justify-center gap-space-xs min-w-[72px] h-14 rounded-lg transition-all bg-primary-container text-on-primary-container shadow-[0_1px_8px_rgba(0,0,0,0.04)] scale-105"
+          data-path="config-discos"
+          href="#"
+          ><span class="material-symbols-outlined text-2xl">tune</span
+          ><span
+            class="font-label-sm text-label-sm uppercase tracking-wider text-center leading-none"
+            >Discos</span
+          ></a
+        ><a
+          class="flex flex-col items-center justify-center gap-space-xs min-w-[72px] h-14 rounded-lg text-on-surface-variant transition-all"
+          data-path="rutina-sets"
+          href="#"
+          ><span class="material-symbols-outlined text-2xl">fact_check</span
+          ><span
+            class="font-label-sm text-label-sm uppercase tracking-wider text-center leading-none"
+            >Rutina</span
+          ></a
+        ><a
+          class="flex flex-col items-center justify-center gap-space-xs min-w-[72px] h-14 rounded-lg text-on-surface-variant transition-all"
+          data-path="historial"
+          href="#"
+          ><span class="material-symbols-outlined text-2xl">military_tech</span
+          ><span
+            class="font-label-sm text-label-sm uppercase tracking-wider text-center leading-none"
+            >Historial</span
+          ></a
+        >
+      </div>
+    </nav>
+  </body>
+</html>

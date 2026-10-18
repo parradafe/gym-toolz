@@ -1,0 +1,96 @@
+/*
+ * Reusable comic-style building blocks. Prefer these over repeating
+ * border + shadow + radius combos in each component.
+ *
+ * Stroke widths snap to 4 steps (the raw HTML used 1.5 / 2 / 2.5 / 3px):
+ *   comic-stroke-thin 1.5px · comic-stroke 2px · comic-stroke-bold 2.5px · comic-stroke-heavy 3px
+ * Shadow offsets snap to shadow-comic-xs|sm|md|lg|xl (1/2/3/4/6px).
+ */
+
+/* ── Ink strokes ─────────────────────────────── */
+@utility comic-stroke-thin {
+  border: 1.5px solid var(--color-ink);
+}
+@utility comic-stroke {
+  border: 2px solid var(--color-ink);
+}
+@utility comic-stroke-bold {
+  border: 2.5px solid var(--color-ink);
+}
+@utility comic-stroke-heavy {
+  border: 3px solid var(--color-ink);
+}
+
+/* ── Composite surfaces ──────────────────────── */
+/* Big section container */
+@utility comic-panel {
+  border: 2.5px solid var(--color-ink);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-comic-lg);
+}
+/* List row / small card */
+@utility comic-card {
+  border: 2px solid var(--color-ink);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-comic-sm);
+}
+/* Badge / tag / pill */
+@utility comic-chip {
+  border: 1.5px solid var(--color-ink);
+  border-radius: var(--radius-DEFAULT);
+}
+/* Modal dialog */
+@utility comic-modal {
+  border: 3px solid var(--color-ink);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-comic-xl);
+}
+
+/* ── Interaction ─────────────────────────────── */
+/* Button pushes into its shadow when pressed */
+@utility comic-press {
+  transition-property: transform, box-shadow;
+  transition-duration: 150ms;
+  &:active {
+    transform: translate(2px, 2px);
+    box-shadow: var(--shadow-comic-xs);
+  }
+}
+
+/* ── Pop-art decoration ──────────────────────── */
+/* Halftone (Ben-Day) dot overlay; combine with absolute inset-0 pointer-events-none opacity-40 */
+@utility halftone {
+  background-image: radial-gradient(var(--color-ink) 1.5px, transparent 1.5px);
+  background-size: 8px 8px;
+}
+/* Comic burst star shape */
+@utility comic-burst {
+  clip-path: polygon(
+    50% 0%, 65% 28%, 98% 35%, 75% 58%, 79% 91%,
+    50% 75%, 21% 91%, 25% 58%, 2% 35%, 35% 28%
+  );
+}
+/* Bar knurling stripes */
+@utility knurl {
+  background-image: repeating-linear-gradient(
+    45deg,
+    var(--color-ink) 0,
+    var(--color-ink) 1px,
+    transparent 0,
+    transparent 4px
+  );
+}
+
+/* ── Layout helpers ──────────────────────────── */
+@utility pt-safe {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+@utility pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

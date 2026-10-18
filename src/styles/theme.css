@@ -1,0 +1,210 @@
+/*
+ * Design tokens (single source of truth).
+ * Derived from src/raw-assets/*.html: pop-art / comic look with a Material-3
+ * style palette, hard ink outlines and offset (blur-less) shadows.
+ *
+ * Components must use these tokens through Tailwind classes
+ * (bg-primary-container, text-on-surface, shadow-comic-md, ...) and never
+ * hardcode hex colors, px font sizes or shadow-[..#1a1b24] values.
+ */
+
+@theme {
+  /* Reset the default palette so only brand tokens exist */
+  --color-*: initial;
+
+  /* ── Colors: base ─────────────────────────────── */
+  --color-transparent: transparent;
+  --color-current: currentColor;
+  --color-white: #ffffff;
+  --color-black: #000000;
+  /* Ink: outline + hard shadow color used on every comic element */
+  --color-ink: #1a1b24;
+
+  /* ── Colors: surfaces ─────────────────────────── */
+  --color-background: #fbf8ff;
+  --color-surface: #fbf8ff;
+  --color-surface-bright: #fbf8ff;
+  --color-surface-dim: #dad9e6;
+  --color-surface-tint: #6a5f00;
+  --color-surface-variant: #e3e1ee;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #f4f2ff;
+  --color-surface-container: #eeecfa;
+  --color-surface-container-high: #e8e7f4;
+  --color-surface-container-highest: #e3e1ee;
+  --color-inverse-surface: #2f303a;
+  --color-inverse-on-surface: #f1effd;
+  --color-inverse-primary: #dec800;
+
+  --color-on-background: #1a1b24;
+  --color-on-surface: #1a1b24;
+  --color-on-surface-variant: #4b4731;
+  --color-outline: #7c775f;
+  --color-outline-variant: #cdc7aa;
+
+  /* ── Colors: primary (yellow, the hero accent) ── */
+  --color-primary: #6a5f00;
+  --color-on-primary: #ffffff;
+  --color-primary-container: #ffe600;
+  --color-on-primary-container: #726600;
+  --color-primary-fixed: #fde400;
+  --color-primary-fixed-dim: #dec800;
+  --color-on-primary-fixed: #201c00;
+  --color-on-primary-fixed-variant: #504700;
+
+  /* ── Colors: secondary (red, action / impact) ── */
+  --color-secondary: #ba002e;
+  --color-on-secondary: #ffffff;
+  --color-secondary-container: #e6143e;
+  --color-on-secondary-container: #fffbff;
+  --color-secondary-fixed: #ffdad9;
+  --color-secondary-fixed-dim: #ffb3b3;
+  --color-on-secondary-fixed: #400009;
+  --color-on-secondary-fixed-variant: #920022;
+
+  /* ── Colors: tertiary (blue, info) ───────────── */
+  --color-tertiary: #00629d;
+  --color-on-tertiary: #ffffff;
+  --color-tertiary-container: #d2e6ff;
+  --color-on-tertiary-container: #006aa8;
+  --color-tertiary-fixed: #cfe5ff;
+  --color-tertiary-fixed-dim: #98cbff;
+  --color-on-tertiary-fixed: #001d33;
+  --color-on-tertiary-fixed-variant: #004a77;
+
+  /* ── Colors: error ───────────────────────────── */
+  --color-error: #ba1a1a;
+  --color-on-error: #ffffff;
+  --color-error-container: #ffdad6;
+  --color-on-error-container: #93000a;
+
+  /* ── Colors: weight plates (gym domain) ──────── */
+  --color-plate-25: #ba002e;
+  --color-plate-20: #00629d;
+  --color-plate-15: #dec800;
+  --color-plate-10: #6a5f00;
+  --color-plate-5: #dad9e6;
+  --color-plate-2-5: #1a1b24;
+  --color-plate-1-25: #7c775f;
+  --color-plate-0-5: #e3e1ee;
+  --color-plate-green: #2e7d32;
+
+  /* ── Typography: families ────────────────────── */
+  --font-display: 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif;
+  --font-text: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+
+  /* Role aliases kept 1:1 with the raw HTML (font-headline-sm, font-label-sm…) */
+  --font-headline-xl: var(--font-display);
+  --font-headline-xl-mobile: var(--font-display);
+  --font-headline-lg: var(--font-display);
+  --font-headline-lg-mobile: var(--font-display);
+  --font-headline-md: var(--font-display);
+  --font-headline-sm: var(--font-display);
+  --font-body-lg: var(--font-text);
+  --font-body-md: var(--font-text);
+  --font-body-sm: var(--font-text);
+  --font-label-lg: var(--font-text);
+  --font-label-md: var(--font-text);
+  --font-label-sm: var(--font-text);
+
+  /* ── Typography: scale (size / line-height / tracking / weight) ── */
+  --text-headline-xl: 44px;
+  --text-headline-xl--line-height: 48px;
+  --text-headline-xl--letter-spacing: -0.03em;
+  --text-headline-xl--font-weight: 800;
+
+  --text-headline-xl-mobile: 34px;
+  --text-headline-xl-mobile--line-height: 38px;
+  --text-headline-xl-mobile--letter-spacing: -0.02em;
+  --text-headline-xl-mobile--font-weight: 800;
+
+  --text-headline-lg: 30px;
+  --text-headline-lg--line-height: 36px;
+  --text-headline-lg--letter-spacing: -0.02em;
+  --text-headline-lg--font-weight: 800;
+
+  --text-headline-lg-mobile: 26px;
+  --text-headline-lg-mobile--line-height: 32px;
+  --text-headline-lg-mobile--letter-spacing: -0.02em;
+  --text-headline-lg-mobile--font-weight: 800;
+
+  --text-headline-md: 22px;
+  --text-headline-md--line-height: 28px;
+  --text-headline-md--font-weight: 700;
+
+  --text-headline-sm: 18px;
+  --text-headline-sm--line-height: 24px;
+  --text-headline-sm--font-weight: 700;
+
+  --text-body-lg: 18px;
+  --text-body-lg--line-height: 26px;
+  --text-body-lg--font-weight: 500;
+
+  --text-body-md: 16px;
+  --text-body-md--line-height: 22px;
+  --text-body-md--font-weight: 500;
+
+  --text-body-sm: 14px;
+  --text-body-sm--line-height: 18px;
+  --text-body-sm--font-weight: 400;
+
+  --text-label-lg: 15px;
+  --text-label-lg--line-height: 20px;
+  --text-label-lg--letter-spacing: 0.04em;
+  --text-label-lg--font-weight: 700;
+
+  --text-label-md: 13px;
+  --text-label-md--line-height: 16px;
+  --text-label-md--letter-spacing: 0.06em;
+  --text-label-md--font-weight: 700;
+
+  --text-label-sm: 11px;
+  --text-label-sm--line-height: 14px;
+  --text-label-sm--letter-spacing: 0.08em;
+  --text-label-sm--font-weight: 700;
+
+  /* Micro text used for plate/sleeve captions */
+  --text-micro: 10px;
+  --text-micro--line-height: 12px;
+
+  /* ── Spacing (semantic, on top of the default 0.25rem scale) ── */
+  --spacing-space-xs: 0.25rem;
+  --spacing-space-sm: 0.5rem;
+  --spacing-space-md: 1rem;
+  --spacing-space-lg: 1.5rem;
+  --spacing-space-xl: 2.25rem;
+  --spacing-gutter: 1rem;
+  /* Horizontal page margin (px-margin) */
+  --spacing-margin: 1.25rem;
+
+  /* ── Radius ─────────────────────────────────── */
+  --radius-*: initial;
+  --radius-none: 0;
+  --radius-xs: 0.125rem;
+  --radius-DEFAULT: 0.125rem;
+  --radius-lg: 0.25rem;
+  --radius-xl: 0.5rem;
+  --radius-2xl: 1rem;
+  /* Real circle: avatars, plate discs, switches */
+  --radius-full: 9999px;
+
+  /* ── Shadows: hard, blur-less ink offsets ─────── */
+  --shadow-*: initial;
+  --shadow-comic-xs: 1px 1px 0 var(--color-ink);
+  --shadow-comic-sm: 2px 2px 0 var(--color-ink);
+  --shadow-comic-md: 3px 3px 0 var(--color-ink);
+  --shadow-comic-lg: 4px 4px 0 var(--color-ink);
+  --shadow-comic-xl: 6px 6px 0 var(--color-ink);
+  --shadow-comic-inset: inset 0 2px 6px rgb(0 0 0 / 0.1);
+  /* Soft shadows, only for fixed chrome (header / bottom nav) */
+  --shadow-bar-top: 0 1px 8px rgb(0 0 0 / 0.04);
+  --shadow-bar-bottom: 0 -2px 12px rgb(0 0 0 / 0.06);
+
+  /* ── Layout ─────────────────────────────────── */
+  --spacing-header: 4rem;
+  --spacing-nav: 5rem;
+  --breakpoint-*: initial;
+  --breakpoint-sm: 40rem;
+  --breakpoint-md: 48rem;
+  --breakpoint-lg: 64rem;
+}

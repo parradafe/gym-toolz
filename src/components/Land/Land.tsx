@@ -5,6 +5,7 @@ import { PlateControls } from "./components/PlateControls";
 import { SessionActions } from "./components/SessionActions";
 import { SetSavedModal } from "./components/SetSavedModal";
 import { SleeveVisualizer } from "./components/SleeveVisualizer";
+import { Dumbells } from "../dumbells/Dumbells";
 import { CableTotal } from "../plates/CableTotal";
 import { PlateTower } from "../plates/PlateTower";
 import { usePlateTower } from "../plates/usePlateTower";
@@ -22,6 +23,7 @@ export function Land() {
   const calculator = useLoadCalculator();
   const { calc, unit, isBarbell, barKg } = calculator;
   const isCables = calculator.mode === "cables";
+  const isDumbbell = calculator.mode === "dumbbell";
   const tower = usePlateTower();
   const cableLoad = calcCableLoad(
     tower.plateIndex,
@@ -57,6 +59,10 @@ export function Land() {
               onSelectPlate={tower.selectPlate}
               onSelectMicro={tower.selectMicro}
             />
+          </section>
+        ) : isDumbbell ? (
+          <section className="px-margin mt-3">
+            <Dumbells />
           </section>
         ) : (
           <SleeveVisualizer

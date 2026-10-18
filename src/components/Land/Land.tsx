@@ -5,6 +5,10 @@ import { PlateControls } from "./components/PlateControls";
 import { SessionActions } from "./components/SessionActions";
 import { SetSavedModal } from "./components/SetSavedModal";
 import { SleeveVisualizer } from "./components/SleeveVisualizer";
+import { CableTotal } from "../plates/CableTotal";
+import { PlateTower } from "../plates/PlateTower";
+import { usePlateTower } from "../plates/usePlateTower";
+import { calcCableLoad } from "../plates/utils";
 import {
   EQUIPMENT_TABS,
   FRACTIONAL_PLATES,
@@ -17,6 +21,14 @@ import { describePlates, expandDiscs, getActivePlates } from "./utils";
 export function Land() {
   const calculator = useLoadCalculator();
   const { calc, unit, isBarbell, barKg } = calculator;
+  const isCables = calculator.mode === "cables";
+  const tower = usePlateTower();
+  const cableLoad = calcCableLoad(
+    tower.plateIndex,
+    calculator.cableStepKg,
+    tower.microKg,
+    calculator.cableRatio,
+  );
 
   const activePlates = getActivePlates(calculator.plates);
   const savedWeight = formatWeight(calc.totalKg, unit);
@@ -36,27 +48,51 @@ export function Land() {
             onSelect={calculator.setBarId}
           />
         )}
-        <SleeveVisualizer
-          discs={expandDiscs(activePlates)}
-          knurlLabel={isBarbell ? formatWeight(barKg, unit) : "MANGO"}
-          sleeveDetail={describePlates(activePlates, calc.perSideKg, unit)}
-          onClear={calculator.clearPlates}
-        />
-        <PlateControls
-          plateCards={PLATE_CARDS.filter((card) => calculator.isListed(card.weight))}
-          fractionals={FRACTIONAL_PLATES.filter((f) => calculator.isListed(f.weight))}
-          canAdd={calculator.canAdd}
-          plates={calculator.plates}
-          onAdd={calculator.addPlate}
-          onRemove={calculator.removePlate}
-        />
-        <HeroTotal
-          unit={unit}
-          onUnitChange={calculator.setUnit}
-          calc={calc}
-          isBarbell={isBarbell}
-          barKg={barKg}
-        />
+        {isCables ? (
+          <section className="px-margin mt-3">
+            <PlateTower
+              plateIndex={tower.plateIndex}
+              microKg={tower.microKg}
+              stepKg={calculator.cableStepKg}
+              onSelectPlate={tower.selectPlate}
+              onSelectMicro={tower.selectMicro}
+            />
+          </section>
+        ) : (
+          <SleeveVisualizer
+            discs={expandDiscs(activePlates)}
+            knurlLabel={isBarbell ? formatWeight(barKg, unit) : "MANGO"}
+            sleeveDetail={describePlates(activePlates, calc.perSideKg, unit)}
+            onClear={calculator.clearPlates}
+          />
+        )}
+        {isCables ? (
+          <CableTotal
+            unit={unit}
+            onUnitChange={calculator.setUnit}
+            load={cableLoad}
+            ratio={calculator.cableRatio}
+          />
+        ) : (
+          <>
+            <PlateControls
+              plateCards={PLATE_CARDS.filter((card) => calculator.isListed(card.weight))}
+              fractionals={FRACTIONAL_PLATES.filter((f) => calculator.isListed(f.weight))}
+              canAdd={calculator.canAdd}
+              plates={calculator.plates}
+              onAdd={calculator.addPlate}
+              onRemove={calculator.removePlate}
+            />
+            <HeroTotal
+              unit={unit}
+              onUnitChange={calculator.setUnit}
+              calc={calc}
+              isBarbell={isBarbell}
+              barKg={barKg}
+            />
+
+          </>
+        )}
 
         {/* <SessionActions onLogSet={calculator.openSavedModal} /> */}
       </div>

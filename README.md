@@ -1,72 +1,72 @@
 # GYM TOOLZ
 
-Aplicación web móvil (mobile-first) para **calcular rápidamente la carga total de una barra** en el gimnasio y **configurar el equipo disponible** en tu gimnasio (discos, barras y poleas). Olvídate de sumar discos de memoria: carga los discos de cada lado y la app te dice el peso total en KG o LBS.
+A mobile-first web app to **quickly calculate the total load on a barbell** at the gym and **configure the equipment available** in your gym (plates, bars and cables). Stop adding up plates in your head: load the plates on each side and the app tells you the total weight in KG or LBS.
 
-Interfaz en español con estética de cómic (paneles con trazo grueso, "POW!", halftone).
+The interface is in Spanish, with a comic-book look (thick-outlined panels, "POW!", halftone).
 
-## Objetivo
+## Goal
 
-Evitar errores de cálculo al montar peso. La app refleja **el equipo real que tienes a mano**: si tu gimnasio solo tiene 4 discos de 25 kg o no tiene barra romana, lo configuras una vez y la calculadora solo te ofrece lo que realmente puedes cargar.
+Avoid math mistakes when loading weight. The app reflects **the real equipment you have on hand**: if your gym only has 4 plates of 25 kg or no triceps bar, you set it up once and the calculator only offers what you can actually load.
 
-## Funciones
+## Features
 
-### Calculadora de carga (`/`)
+### Load calculator (`/`)
 
-- **Selector de equipo:** Barra, Mancuernas, Kettlebell y Poleas.
-- **Selector de barra** (modo barra): elige entre las barras activas (olímpica, femenina, Z, romana, hexagonal o personalizadas).
-- **Visualizador de manga:** dibujo de la barra con los discos cargados en un lado, con tamaños y colores proporcionales al peso, y detalle por lado (p. ej. `1x20k + 1x10k (30 KG)`).
-- **Control de discos:** agrega o quita discos de 25, 20, 15, 10, 5 kg y fraccionales de 2.5, 1.25 y 0.5 kg. Los discos deshabilitados o sin stock no aparecen, y no puedes cargar más discos de los que tienes.
-- **Carga total:** peso de la barra + discos (ambos lados) en grande, con la conversión a la otra unidad (`≈ 99.2 LBS`).
-- **Cambio de unidad KG / LBS** al instante (los pesos se almacenan siempre en kg).
-- **Limpiar** la manga con un toque.
+- **Equipment selector:** Barbell, Dumbbells, Kettlebell and Cables.
+- **Bar selector** (barbell mode): choose among the active bars (Olympic, women's, Z-curl, triceps, trap bar or custom ones).
+- **Sleeve visualizer:** a drawing of the bar with the plates loaded on one side, with sizes and colors proportional to the weight, plus a per-side breakdown (e.g. `1x20k + 1x10k (30 KG)`).
+- **Plate controls:** add or remove plates of 25, 20, 15, 10, 5 kg and fractional plates of 2.5, 1.25 and 0.5 kg. Disabled or out-of-stock plates are hidden, and you can't load more plates than you own.
+- **Total load:** bar weight + plates (both sides) displayed large, with the conversion to the other unit (`≈ 99.2 LBS`).
+- **KG / LBS switch** on the fly (weights are always stored in kg).
+- **Clear** the sleeve with one tap.
 
-### Configuración de equipo (`/discos`)
+### Equipment settings (`/discos`)
 
-- **Discos:** activar/desactivar cada disco y definir el **stock** (pares disponibles) de los discos principales; activar/desactivar los fraccionales.
-- **Calibración:** vista de pesos nominales vs. medidos de discos y barras.
-- **Barras:** activar/desactivar las barras estándar y **crear barras personalizadas** (nombre y peso) o eliminarlas.
-- **Poleas:** paso de la pila (5 / 4.5 / 2.5 kg) y relación de polea (1:1 o 2:1, mitad de peso).
-- **Guardar y restablecer** la configuración a sus valores por defecto.
-- **Selector de unidad** KG / LBS.
+- **Plates:** enable/disable each plate and set the **stock** (pairs available) of the main plates; enable/disable fractional plates.
+- **Calibration:** view of nominal vs. measured weights for plates and bars.
+- **Bars:** enable/disable the standard bars and **create custom bars** (name and weight) or delete them.
+- **Cables:** stack step (5 / 4.5 / 2.5 kg) and pulley ratio (1:1 or 2:1, half weight).
+- **Save and reset** the settings to their defaults.
+- **KG / LBS** unit selector.
 
-### Persistencia y consistencia
+### Persistence and consistency
 
-- Todo se guarda localmente en el navegador (`localStorage`, clave `gym-toolz:v1`); no hay backend ni cuenta.
-- La sesión de carga se mantiene coherente con la configuración: si desactivas una barra o un disco, o reduces su stock, la carga actual se ajusta automáticamente.
+- Everything is stored locally in the browser (`localStorage`, key `gym-toolz:v1`); there is no backend or account.
+- The current load stays consistent with the settings: if you disable a bar or a plate, or reduce its stock, the current load adjusts automatically.
 
-### Próximamente (código preparado, aún oculto)
+### Coming soon (code in place, still hidden)
 
-Registro de series ("Log set"), rutinas e historial.
+Set logging ("Log set"), routines and history.
 
 ## Stack
 
 - [React 19](https://react.dev) + TypeScript
 - [Vite](https://vite.dev)
-- [React Router](https://reactrouter.com) para la navegación
-- [Zustand](https://zustand.docs.pmnd.rs) (con middleware `persist`) para el estado
+- [React Router](https://reactrouter.com) for navigation
+- [Zustand](https://zustand.docs.pmnd.rs) (with the `persist` middleware) for state
 - [Tailwind CSS 4](https://tailwindcss.com)
 
-## Estructura
+## Structure
 
 ```
 src/
 ├── components/
-│   ├── Land/      # Calculadora de carga
-│   ├── Config/    # Configuración de discos, barras y poleas
-│   ├── layout/    # Layout y navegación inferior
-│   └── shared/    # Componentes reutilizables (Modal, Stepper, Toggle...)
-├── store/         # Estado global (useGymStore) y selectores
-└── lib/           # Utilidades (conversión de unidades, cx)
+│   ├── Land/      # Load calculator
+│   ├── Config/    # Plate, bar and cable settings
+│   ├── layout/    # Layout and bottom navigation
+│   └── shared/    # Reusable components (Modal, Stepper, Toggle...)
+├── store/         # Global state (useGymStore) and selectors
+└── lib/           # Utilities (unit conversion, cx)
 ```
 
-## Desarrollo
+## Development
 
-Requiere Node.js y [pnpm](https://pnpm.io).
+Requires Node.js and [pnpm](https://pnpm.io).
 
 ```bash
-pnpm install     # instalar dependencias
-pnpm dev         # servidor de desarrollo
-pnpm build       # type-check + build de producción
-pnpm preview     # previsualizar el build
+pnpm install     # install dependencies
+pnpm dev         # development server
+pnpm build       # type-check + production build
+pnpm preview     # preview the build
 pnpm lint        # ESLint
 ```

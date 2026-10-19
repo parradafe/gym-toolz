@@ -1,13 +1,15 @@
+import type { Unit } from '../../shared/UnitSwitch'
+import { plateWeightKg } from '../utils'
 import { PlateRow } from './PlateRow'
 
 interface PlateStackProps {
   plates: number[]
   selectedIndex: number
-  stepKg: number
+  unit: Unit
   onSelect: (index: number) => void
 }
 
-export function PlateStack({ plates, selectedIndex, stepKg, onSelect }: PlateStackProps) {
+export function PlateStack({ plates, selectedIndex, unit, onSelect }: PlateStackProps) {
   return (
     <div className="w-full max-w-70 flex flex-col gap-1 relative py-1">
       {/* Vertical guide rods */}
@@ -19,7 +21,8 @@ export function PlateStack({ plates, selectedIndex, stepKg, onSelect }: PlateSta
         <PlateRow
           key={index}
           index={index}
-          weightKg={index * stepKg}
+          weightKg={plateWeightKg(index)}
+          unit={unit}
           selected={index === selectedIndex}
           onSelect={onSelect}
         />

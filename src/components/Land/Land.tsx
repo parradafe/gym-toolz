@@ -18,9 +18,7 @@ export function Land() {
   const isDumbbell = calculator.mode === "dumbbell";
   const cableLoad = calcCableLoad(
     calculator.cablePlateIndex,
-    calculator.cableStepKg,
     calculator.cableMicroKg,
-    calculator.cableRatio,
   );
 
   const activePlates = getActivePlates(calculator.plates);
@@ -45,7 +43,7 @@ export function Land() {
             <PlateTower
               plateIndex={calculator.cablePlateIndex}
               microKg={calculator.cableMicroKg}
-              stepKg={calculator.cableStepKg}
+              unit={calculator.unit}
               onSelectPlate={calculator.selectCablePlate}
               onSelectMicro={calculator.selectCableMicro}
             />
@@ -82,8 +80,8 @@ export function Land() {
           calc={
             isCables
               ? {
-                  totalKg: cableLoad.effectiveKg,
-                  totalLb: toUnit(cableLoad.effectiveKg, "LBS"),
+                  totalKg: cableLoad.rawKg,
+                  totalLb: toUnit(cableLoad.rawKg, "LBS"),
                   platesOnlyKg: 0,
                   perSideKg: 0,
                 }
@@ -91,7 +89,7 @@ export function Land() {
           }
           isBarbell={isBarbell}
           barKg={barKg}
-          cable={isCables ? { load: cableLoad, ratio: calculator.cableRatio } : undefined}
+          cable={isCables ? cableLoad : undefined}
         />
 
         {/* <SessionActions onLogSet={calculator.openSavedModal} /> */}

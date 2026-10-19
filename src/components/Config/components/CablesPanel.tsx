@@ -3,26 +3,22 @@ import { formatNumber, toUnit } from '../../../lib/units'
 import { useUnit } from '../../../store/useGymStore'
 import { Panel } from '../../shared/Panel'
 import { SectionHeading } from '../../shared/SectionHeading'
-import type { CableStep, Option } from '../types'
+import type { CableStep } from '../types'
 
 interface CablesPanelProps {
   steps: CableStep[]
-  ratios: Option[]
   stepId: string
-  ratioId: string
   onStepChange: (id: string) => void
-  onRatioChange: (id: string) => void
 }
 
-export function CablesPanel({ steps, ratios, stepId, ratioId, onStepChange, onRatioChange }: CablesPanelProps) {
+export function CablesPanel({ steps, stepId, onStepChange }: CablesPanelProps) {
   const unit = useUnit()
   return (
     <section className="flex flex-col gap-space-sm">
       <SectionHeading
         icon="cable"
         title="3. POLEAS & CABLES"
-        tag="RATIO"
-        tagTone="primary"
+        tag="PASO"
         iconClassName="bg-tertiary text-on-tertiary"
       />
       <Panel className="flex flex-col gap-3">
@@ -50,37 +46,6 @@ export function CablesPanel({ steps, ratios, stepId, ratioId, onStepChange, onRa
                 </button>
               )
             })}
-          </div>
-        </div>
-        <div className="pt-2 border-t-[1.5px] border-dashed border-ink">
-          <div className="flex items-center justify-between">
-            <div>
-              <span className="font-label-md text-label-md uppercase text-on-surface font-black block">
-                Ratio de Carga / Polea
-              </span>
-              <span className="font-body-sm text-body-sm text-on-surface-variant">
-                Multiplicador de resistencia real
-              </span>
-            </div>
-            <div className="flex gap-1.5">
-              {ratios.map((ratio) => {
-                const selected = ratio.id === ratioId
-                return (
-                  <button
-                    key={ratio.id}
-                    type="button"
-                    aria-pressed={selected}
-                    onClick={() => onRatioChange(ratio.id)}
-                    className={cx(
-                      'px-3 py-1 font-label-md text-label-md font-black rounded comic-stroke shadow-comic-sm',
-                      selected ? 'bg-primary-container text-on-primary-fixed' : 'bg-surface-container-lowest',
-                    )}
-                  >
-                    {ratio.label}
-                  </button>
-                )
-              })}
-            </div>
           </div>
         </div>
       </Panel>

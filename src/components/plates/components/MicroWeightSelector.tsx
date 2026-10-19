@@ -1,14 +1,17 @@
 import { cx } from '../../../lib/cx'
+import { formatWeight } from '../../../lib/units'
 import { Icon } from '../../shared/Icon'
+import type { Unit } from '../../shared/UnitSwitch'
 import type { MicroOption } from '../types'
 
 interface MicroWeightSelectorProps {
   options: MicroOption[]
   selectedKg: number
+  unit: Unit
   onSelect: (kg: number) => void
 }
 
-export function MicroWeightSelector({ options, selectedKg, onSelect }: MicroWeightSelectorProps) {
+export function MicroWeightSelector({ options, selectedKg, unit, onSelect }: MicroWeightSelectorProps) {
   return (
     <div className="w-full mt-space-md bg-surface-container-low rounded-xl p-space-sm flex items-center justify-between">
       <div className="flex items-center gap-1.5">
@@ -33,7 +36,7 @@ export function MicroWeightSelector({ options, selectedKg, onSelect }: MicroWeig
                   : 'bg-surface-container-high text-on-surface-variant',
               )}
             >
-              {option.label}
+              {option.kg === 0 ? '0' : `+${formatWeight(option.kg, unit)}`}
             </button>
           )
         })}

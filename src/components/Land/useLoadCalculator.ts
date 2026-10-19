@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { useShallow } from 'zustand/react/shallow'
-import { CABLE_STEPS } from '../Config/data'
 import { selectActiveBars, selectBarKg, selectTotals } from '../../store/selectors'
 import { useGymStore } from '../../store/useGymStore'
 import type { PlateWeight } from './types'
@@ -32,13 +31,10 @@ export function useLoadCalculator() {
     setBarId: store.setBar,
     bars,
     barKg,
-    /** Weight of each plate in the cable stack, from Config. */
-    cableStepKg: CABLE_STEPS.find((step) => step.id === store.cable.step)?.kg ?? 5,
     cablePlateIndex: store.cable.plateIndex,
     cableMicroKg: store.cable.microKg,
     selectCablePlate: store.setCablePlate,
     selectCableMicro: store.setCableMicro,
-    cableRatio: store.cable.ratio === '1:1' ? (1 as const) : (2 as const),
     isBarbell: store.mode === 'barbell',
     plates: store.loaded,
     calc,

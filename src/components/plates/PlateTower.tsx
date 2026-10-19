@@ -1,3 +1,4 @@
+import type { Unit } from '../shared/UnitSwitch'
 import { Chip } from '../shared/Chip'
 import { Icon } from '../shared/Icon'
 import { MicroWeightSelector } from './components/MicroWeightSelector'
@@ -9,15 +10,14 @@ interface PlateTowerProps {
   /** 1-based plate the pin is on. */
   plateIndex: number
   microKg: number
-  /** Weight of each plate in the stack. */
-  stepKg: number
+  unit: Unit
   onSelectPlate: (index: number) => void
   onSelectMicro: (kg: number) => void
 }
 
 const PLATES = Array.from({ length: PLATE_COUNT }, (_, i) => i + 1)
 
-export function PlateTower({ plateIndex, microKg, stepKg, onSelectPlate, onSelectMicro }: PlateTowerProps) {
+export function PlateTower({ plateIndex, microKg, unit, onSelectPlate, onSelectMicro }: PlateTowerProps) {
   return (
     <section className="w-full rounded-xl bg-surface-container-low p-space-md comic-panel">
       <div className="flex items-center justify-between mb-space-sm">
@@ -31,8 +31,8 @@ export function PlateTower({ plateIndex, microKg, stepKg, onSelectPlate, onSelec
       </div>
       <div className="relative w-full bg-surface-container-lowest rounded-xl p-space-md comic-card overflow-hidden flex flex-col items-center">
         <PulleyTop />
-        <PlateStack plates={PLATES} selectedIndex={plateIndex} stepKg={stepKg} onSelect={onSelectPlate} />
-        <MicroWeightSelector options={MICRO_OPTIONS} selectedKg={microKg} onSelect={onSelectMicro} />
+        <PlateStack plates={PLATES} selectedIndex={plateIndex} unit={unit} onSelect={onSelectPlate} />
+        <MicroWeightSelector options={MICRO_OPTIONS} selectedKg={microKg} unit={unit} onSelect={onSelectMicro} />
       </div>
     </section>
   )

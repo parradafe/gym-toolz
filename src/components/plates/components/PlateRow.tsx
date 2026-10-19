@@ -1,13 +1,16 @@
 import { cx } from '../../../lib/cx'
+import { formatWeight } from '../../../lib/units'
+import type { Unit } from '../../shared/UnitSwitch'
 
 interface PlateRowProps {
   index: number
   weightKg: number
+  unit: Unit
   selected: boolean
   onSelect: (index: number) => void
 }
 
-export function PlateRow({ index, weightKg, selected, onSelect }: PlateRowProps) {
+export function PlateRow({ index, weightKg, unit, selected, onSelect }: PlateRowProps) {
   return (
     <button
       type="button"
@@ -31,7 +34,7 @@ export function PlateRow({ index, weightKg, selected, onSelect }: PlateRowProps)
       <span
         className={cx('font-label-sm text-label-sm', selected ? 'font-extrabold tracking-wide' : 'font-bold')}
       >
-        {weightKg} KG{selected && ' (SELECCIÓN)'}
+        {formatWeight(weightKg, unit).toUpperCase()}{selected && ' (SELECCIÓN)'}
       </span>
       {selected ? (
         <>

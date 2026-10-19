@@ -41,8 +41,6 @@ export function useConfig() {
     addBar: store.addCustomBar,
     cableStep: store.cable.step,
     setCableStep: store.setCableStep,
-    cableRatio: store.cable.ratio,
-    setCableRatio: store.setCableRatio,
     barModalOpen,
     setBarModalOpen,
     calibrationOpen,

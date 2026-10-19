@@ -2,7 +2,6 @@ import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
 import {
   BARS,
-  DEFAULT_CABLE_RATIO,
   DEFAULT_CABLE_STEP,
   FRACTIONAL_PLATES,
   PLATES,
@@ -28,8 +27,8 @@ interface GymData {
   plates: Record<string, PlateState>
   customBars: BarConfig[]
   barActive: Record<string, boolean>
-  /** `step`/`ratio` are Config; `plateIndex`/`microKg` are the pin position in Land. */
-  cable: { step: string; ratio: string; plateIndex: number; microKg: number }
+  /** `step` is Config; `plateIndex`/`microKg` are the pin position in Land. */
+  cable: { step: string; plateIndex: number; microKg: number }
   /** Land session. Weight is per dumbbell, in lb. */
   dumbbell: { weightLb: number; microLb: number; isPair: boolean }
   /** Land session. */
@@ -46,7 +45,6 @@ interface GymActions {
   addCustomBar: (name: string, kg: number) => void
   removeCustomBar: (id: string) => void
   setCableStep: (step: string) => void
-  setCableRatio: (ratio: string) => void
   setCablePlate: (plateIndex: number) => void
   setCableMicro: (microKg: number) => void
   setDumbbellWeight: (weightLb: number) => void
@@ -76,7 +74,6 @@ const defaultEquipment = () => ({
   barActive: defaultBarActive(),
   cable: {
     step: DEFAULT_CABLE_STEP,
-    ratio: DEFAULT_CABLE_RATIO,
     plateIndex: DEFAULT_PLATE_INDEX,
     microKg: 0,
   },
@@ -163,11 +160,11 @@ export const useGymStore = create<GymState>()(
         }),
 
       setCableStep: (step) => set((s) => ({ cable: { ...s.cable, step } })),
-      setCableRatio: (ratio) => set((s) => ({ cable: { ...s.cable, ratio } })),
       setCablePlate: (plateIndex) => set((s) => ({ cable: { ...s.cable, plateIndex } })),
       setCableMicro: (microKg) => set((s) => ({ cable: { ...s.cable, microKg } })),
 
-      setDumbbellWeight: (weightLb) => set((s) => ({ dumbbell: { ...s.dumbbell, weightLb } })),
+      // Picking a rack weight starts fresh: micro-loads belong to the previous selection.
+      setDumbbellWeight: (weightLb) => set((s) => ({ dumbbell: { ...s.dumbbell, weightLb, microLb: 0 } })),
       setDumbbellMicro: (microLb) => set((s) => ({ dumbbell: { ...s.dumbbell, microLb } })),
       setDumbbellPair: (isPair) => set((s) => ({ dumbbell: { ...s.dumbbell, isPair } })),
 

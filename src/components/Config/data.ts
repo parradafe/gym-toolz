@@ -3,7 +3,6 @@ import type {
   CalibrationRow,
   CableStep,
   FractionalPlateConfig,
-  Option,
   PlateConfig,
 } from './types'
 
@@ -101,11 +100,6 @@ export const CABLE_STEPS: CableStep[] = [
   { id: '2.5', kg: 2.5 },
 ]
 
-export const CABLE_RATIOS: Option[] = [
-  { id: '1:1', label: '1:1' },
-  { id: '2:1', label: '2:1 (½ Peso)' },
-]
-
 export const CALIBRATION_ROWS: CalibrationRow[] = [
   { id: 'plate-25', name: 'Disco Nominal', nominalKg: 25, measuredKg: 25.2 },
   { id: 'plate-20', name: 'Disco Nominal', nominalKg: 20, measuredKg: 20.1 },
@@ -113,5 +107,4 @@ export const CALIBRATION_ROWS: CalibrationRow[] = [
 ]
 
 export const DEFAULT_CABLE_STEP = '5'
-export const DEFAULT_CABLE_RATIO = '2:1'
 export const TOAST_MS = 2400

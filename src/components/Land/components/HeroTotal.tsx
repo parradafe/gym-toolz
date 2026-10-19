@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Chip } from '../../shared/Chip'
 import { Icon } from '../../shared/Icon'
-import type { CableLoad, CableRatio } from '../../plates/types'
+import type { CableLoad } from '../../plates/types'
 import type { LoadCalculation, Unit } from '../types'
 import { formatBoth, formatNumber, formatWeight, toUnit } from '../../../lib/units'
 import { UnitSwitch } from '../../shared/UnitSwitch'
@@ -13,7 +13,7 @@ interface HeroTotalProps {
   isBarbell: boolean
   barKg: number
   /** Cable stack breakdown; replaces the bar/plates detail when set. */
-  cable?: { load: CableLoad; ratio: CableRatio }
+  cable?: CableLoad
 }
 
 const formatStack = (load: CableLoad, unit: Unit) =>
@@ -76,7 +76,7 @@ export function HeroTotal({ unit, onUnitChange, calc, isBarbell, barKg, cable }:
               <p className="font-body-sm text-body-sm truncate text-on-surface font-bold">
                 {cable ? (
                   <>
-                    Torre: <span className="text-secondary">{formatStack(cable.load, unit)}</span>
+                    Torre: <span className="text-secondary">{formatStack(cable, unit)}</span>
                   </>
                 ) : isBarbell ? (
                   <>
@@ -90,11 +90,6 @@ export function HeroTotal({ unit, onUnitChange, calc, isBarbell, barKg, cable }:
                 )}
               </p>
             </div>
-            {cable && (
-              <Chip tone="tertiary" className="shrink-0">
-                Ratio {cable.ratio}:1
-              </Chip>
-            )}
             {!cable && isBarbell && (
               <Chip tone="tertiary" className="shrink-0">
                 {formatWeight(calc.perSideKg, unit)} / lado

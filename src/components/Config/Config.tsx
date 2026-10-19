@@ -7,7 +7,6 @@ import { CustomBarModal } from './components/CustomBarModal'
 import { PlatesPanel } from './components/PlatesPanel'
 import { SaveToast } from './components/SaveToast'
 import {
-  CABLE_RATIOS,
   CABLE_STEPS,
   CALIBRATION_ROWS,
   FRACTIONAL_PLATES,
@@ -41,11 +40,8 @@ export function Config() {
         />
         <CablesPanel
           steps={CABLE_STEPS}
-          ratios={CABLE_RATIOS}
           stepId={config.cableStep}
-          ratioId={config.cableRatio}
           onStepChange={config.setCableStep}
-          onRatioChange={config.setCableRatio}
         />
         <ConfigActions onSave={config.save} onReset={config.reset} />
       </div>

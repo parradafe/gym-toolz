@@ -17,7 +17,12 @@ export function HexHead({ side, label }: HexHeadProps) {
       >
         {label}
       </span>
-      <div className="absolute inset-y-1 w-1 rounded-full bg-secondary-container" />
+      <div
+        className={cx(
+          'absolute inset-y-1 w-1 rounded-full bg-secondary-container',
+          side === 'left' ? 'left-1' : 'right-1',
+        )}
+      />
     </div>
   )
 }

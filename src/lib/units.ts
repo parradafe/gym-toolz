@@ -2,6 +2,9 @@ import type { Unit } from '../components/shared/UnitSwitch'
 
 export const LB_PER_KG = 2.20462
 
+/** Plate weights are stored in lb; everything else computes in kg. */
+export const lbToKg = (lb: number): number => lb / LB_PER_KG
+
 export const toUnit = (kg: number, unit: Unit): number => (unit === 'KG' ? kg : kg * LB_PER_KG)
 
 /** "80" instead of "80.0"; one decimal otherwise. */
@@ -20,6 +23,6 @@ export const formatBoth = (kg: number, unit: Unit): string =>
 /** Short label for plate discs: "25k", "55lb", "2.5", ".5". */
 export function formatPlateTag(kg: number, unit: Unit): string {
   const value = formatNumber(toUnit(kg, unit)).replace(/^0\./, '.')
-  if (kg < 5) return value
+  if (toUnit(kg, unit) < 5) return value
   return `${value}${unit === 'KG' ? 'k' : 'lb'}`
 }

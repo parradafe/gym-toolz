@@ -1,4 +1,4 @@
-import { formatPlateTag, formatWeight } from '../../lib/units'
+import { formatPlateTag, formatWeight, lbToKg } from '../../lib/units'
 import type { PlatesPerSide, PlateWeight, Unit } from './types'
 
 export interface ActivePlate {
@@ -21,5 +21,5 @@ export function expandDiscs(active: ActivePlate[]): PlateWeight[] {
 
 export function describePlates(active: ActivePlate[], perSideKg: number, unit: Unit): string {
   if (active.length === 0) return `Sin discos (${formatWeight(0, unit)})`
-  return `${active.map(({ count, weight }) => `${count}x${formatPlateTag(weight, unit)}`).join(' + ')} (${formatWeight(perSideKg, unit)})`
+  return `${active.map(({ count, weight }) => `${count}x${formatPlateTag(lbToKg(weight), unit)}`).join(' + ')} (${formatWeight(perSideKg, unit)})`
 }

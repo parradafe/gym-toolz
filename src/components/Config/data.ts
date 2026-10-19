@@ -9,24 +9,24 @@ import type {
 
 export const PLATES: PlateConfig[] = [
   {
-    id: '25',
-    weight: 25,
+    id: '45',
+    weight: 45,
     name: 'Rojo Competición IWF',
     circleClassName: 'bg-secondary-container text-white',
     badgeClassName: 'bg-primary-container',
     defaultStock: 4,
   },
   {
-    id: '20',
-    weight: 20,
+    id: '35',
+    weight: 35,
     name: 'Azul Olímpico',
     circleClassName: 'bg-tertiary text-white',
     badgeClassName: 'bg-primary-container',
     defaultStock: 6,
   },
   {
-    id: '15',
-    weight: 15,
+    id: '25',
+    weight: 25,
     name: 'Amarillo Estándar',
     circleClassName: 'bg-primary-container text-on-surface',
     badgeClassName: 'bg-white',
@@ -52,16 +52,6 @@ export const FRACTIONAL_PLATES: FractionalPlateConfig[] = [
     id: '2.5',
     weight: 2.5,
     discClassName: 'bg-inverse-surface text-inverse-on-surface text-xs',
-  },
-  {
-    id: '1.25',
-    weight: 1.25,
-    discClassName: 'bg-outline-variant text-on-surface text-micro',
-  },
-  {
-    id: '0.5',
-    weight: 0.5,
-    discClassName: 'bg-secondary-fixed text-on-secondary-fixed text-micro',
   },
 ]
 

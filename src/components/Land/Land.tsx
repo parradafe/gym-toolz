@@ -2,19 +2,12 @@ import { BarTypeSelector } from "./components/BarTypeSelector";
 import { EquipmentTabs } from "./components/EquipmentTabs";
 import { HeroTotal } from "./components/HeroTotal";
 import { PlateControls } from "./components/PlateControls";
-import { SessionActions } from "./components/SessionActions";
-import { SetSavedModal } from "./components/SetSavedModal";
 import { SleeveVisualizer } from "./components/SleeveVisualizer";
 import { Dumbells } from "../dumbells/Dumbells";
 import { CableTotal } from "../plates/CableTotal";
 import { PlateTower } from "../plates/PlateTower";
-import { usePlateTower } from "../plates/usePlateTower";
 import { calcCableLoad } from "../plates/utils";
-import {
-  EQUIPMENT_TABS,
-  FRACTIONAL_PLATES,
-  PLATE_CARDS,
-} from "./data";
+import { EQUIPMENT_TABS, FRACTIONAL_PLATES, PLATE_CARDS } from "./data";
 import { useLoadCalculator } from "./useLoadCalculator";
 import { formatWeight } from "../../lib/units";
 import { describePlates, expandDiscs, getActivePlates } from "./utils";
@@ -24,16 +17,14 @@ export function Land() {
   const { calc, unit, isBarbell, barKg } = calculator;
   const isCables = calculator.mode === "cables";
   const isDumbbell = calculator.mode === "dumbbell";
-  const tower = usePlateTower();
   const cableLoad = calcCableLoad(
-    tower.plateIndex,
+    calculator.cablePlateIndex,
     calculator.cableStepKg,
-    tower.microKg,
+    calculator.cableMicroKg,
     calculator.cableRatio,
   );
 
   const activePlates = getActivePlates(calculator.plates);
-  const savedWeight = formatWeight(calc.totalKg, unit);
 
   return (
     <>
@@ -53,11 +44,11 @@ export function Land() {
         {isCables ? (
           <section className="px-margin mt-3">
             <PlateTower
-              plateIndex={tower.plateIndex}
-              microKg={tower.microKg}
+              plateIndex={calculator.cablePlateIndex}
+              microKg={calculator.cableMicroKg}
               stepKg={calculator.cableStepKg}
-              onSelectPlate={tower.selectPlate}
-              onSelectMicro={tower.selectMicro}
+              onSelectPlate={calculator.selectCablePlate}
+              onSelectMicro={calculator.selectCableMicro}
             />
           </section>
         ) : isDumbbell ? (
@@ -81,14 +72,20 @@ export function Land() {
           />
         ) : (
           <>
-            <PlateControls
-              plateCards={PLATE_CARDS.filter((card) => calculator.isListed(card.weight))}
-              fractionals={FRACTIONAL_PLATES.filter((f) => calculator.isListed(f.weight))}
-              canAdd={calculator.canAdd}
-              plates={calculator.plates}
-              onAdd={calculator.addPlate}
-              onRemove={calculator.removePlate}
-            />
+            {!isDumbbell && (
+              <PlateControls
+                plateCards={PLATE_CARDS.filter((card) =>
+                  calculator.isListed(card.weight),
+                )}
+                fractionals={FRACTIONAL_PLATES.filter((f) =>
+                  calculator.isListed(f.weight),
+                )}
+                canAdd={calculator.canAdd}
+                plates={calculator.plates}
+                onAdd={calculator.addPlate}
+                onRemove={calculator.removePlate}
+              />
+            )}
             <HeroTotal
               unit={unit}
               onUnitChange={calculator.setUnit}
@@ -96,7 +93,6 @@ export function Land() {
               isBarbell={isBarbell}
               barKg={barKg}
             />
-
           </>
         )}
 

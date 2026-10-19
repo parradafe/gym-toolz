@@ -1,6 +1,6 @@
 ---
 name: msg-commit
-description: Generates a commit message that summarizes the implemented changes, following the commit message format from CONTRIBUTING.md (short, imperative, Conventional Commits style such as "feat: add kettlebell weight presets"). It only writes the message; it never stages files or runs git commit. Use only when the user explicitly runs /msg-commit.
+description: Generates a single short paragraph that summarizes all the implemented changes as one commit message, following the style from CONTRIBUTING.md (imperative, optional Conventional Commits prefix such as "feat: add kettlebell weight presets"). It only writes the message; it never stages files or runs git commit. Use only when the user explicitly runs /msg-commit.
 disable-model-invocation: true
 argument-hint: [optional hint about the change]
 allowed-tools: Bash(git status:*), Bash(git diff:*), Bash(git log:*)
@@ -8,30 +8,29 @@ allowed-tools: Bash(git status:*), Bash(git diff:*), Bash(git log:*)
 
 # msg-commit
 
-Generates a commit message summarizing the current changes, using the format defined in the "Commit messages" section of `CONTRIBUTING.md`. It does not create the commit: the user does that themselves.
+Generates one commit message for the current changes, using the style defined in the "Commit messages" section of `CONTRIBUTING.md`. It does not create the commit: the user does that themselves.
 
 ## Format
 
-Short, imperative messages that explain the change, optionally following Conventional Commits:
+Always a single paragraph, no matter how many things changed. It briefly and simply describes the changes, in imperative mood, in one or two sentences at most:
 
 ```
-feat: add kettlebell weight presets
-fix: round LBS conversion to one decimal
-docs: update contributing guide
+feat: add dumbbell rack visualizer and quick adjust controls
+fix: round LBS conversion to one decimal and fix plate tower spacing
 ```
 
-- Subject line only by default: `<type>: <summary>`, lowercase, imperative mood, no trailing period, ideally under 72 characters.
-- Types: `feat`, `fix`, `docs`, `refactor`, `style`, `test`, `chore`, `perf`, `build`.
+- Start with a Conventional Commits type: `feat`, `fix`, `docs`, `refactor`, `style`, `test`, `chore`, `perf`, `build`. Use the type that best fits the overall change.
+- Lowercase, imperative mood, no trailing period, ideally under 72 characters.
 - Write the message in English, even though the UI strings are in Spanish.
-- Add a body only if the _why_ is not obvious from the subject.
+- Never split the message into a subject and a body, and never add bullet lists.
+- Even if the changes touch unrelated areas, produce only one message that covers all of them.
 
 ## Steps
 
 1. Run `git status` and `git diff HEAD` to see staged and unstaged changes. If there are none, say so and stop.
 2. Run `git log -5 --oneline` to match the repository's recent style.
-3. If the changes mix unrelated concerns, suggest splitting them into separate commits (CONTRIBUTING asks for small, focused changes) and provide one message per group, listing the files each covers.
-4. Pick the type from the nature of the change and write the subject. If `$ARGUMENTS` is provided, use it as a hint for the summary.
-5. Output the message in a code block so it can be copied as is.
+3. Identify every change and summarize them all in one paragraph. If `$ARGUMENTS` is provided, use it as a hint for the summary.
+4. Output the message in a code block so it can be copied as is.
 
 ## Rules
 

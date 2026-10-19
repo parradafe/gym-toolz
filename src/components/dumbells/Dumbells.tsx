@@ -1,8 +1,16 @@
 import { Icon } from '../shared/Icon'
 import { UnitSwitch } from '../shared/UnitSwitch'
 import { cx } from '../../lib/cx'
+import { DumbbellRack } from './components/DumbbellRack'
+import { QuickAdjust } from './components/QuickAdjust'
+import { DUMBBELL_STEP_LB, MAX_DUMBBELL_LB, MIN_DUMBBELL_LB } from './data'
 import { VisualState } from './VisualState'
 import { useDumbbellVisual } from './useDumbbellVisual'
+
+const RACK_WEIGHTS_LB = Array.from(
+  { length: (MAX_DUMBBELL_LB - MIN_DUMBBELL_LB) / DUMBBELL_STEP_LB + 1 },
+  (_, i) => MIN_DUMBBELL_LB + i * DUMBBELL_STEP_LB,
+)
 
 const MODES = [
   { isPair: true, icon: 'sync_alt', label: 'Par completo (x2)' },
@@ -11,31 +19,23 @@ const MODES = [
 
 /** Interactive host for the "Estado visual" card: pair/single, unit and weight drive the graphic. */
 export function Dumbells() {
-  const { weight, unit, isPair, setUnit, setIsPair, increase, decrease } = useDumbbellVisual()
+  const {
+    weight,
+    weightLb,
+    unit,
+    isPair,
+    setUnit,
+    setIsPair,
+    selectWeight,
+    addMicro,
+    clearMicro,
+    increase,
+    decrease,
+  } = useDumbbellVisual()
 
   return (
     <div className="flex flex-col gap-space-md">
-      <div className="flex items-center justify-between">
-        <UnitSwitch unit={unit} onChange={setUnit} />
-        <div className="flex items-center gap-1">
-          <button
-            type="button"
-            aria-label="Restar peso"
-            onClick={decrease}
-            className="flex size-11 items-center justify-center rounded-xl bg-surface-container-lowest font-headline-md text-headline-md text-on-surface shadow-comic-sm comic-press"
-          >
-            -
-          </button>
-          <button
-            type="button"
-            aria-label="Sumar peso"
-            onClick={increase}
-            className="flex size-11 items-center justify-center rounded-xl bg-primary-container font-headline-md text-headline-md text-on-primary-fixed shadow-comic-sm comic-press"
-          >
-            +
-          </button>
-        </div>
-      </div>
+      <UnitSwitch unit={unit} onChange={setUnit} />
       <div className="grid grid-cols-2 gap-space-sm">
         {MODES.map((mode) => (
           <button
@@ -60,6 +60,14 @@ export function Dumbells() {
         ))}
       </div>
       <VisualState weight={weight} unit={unit} isPair={isPair} />
+      <QuickAdjust
+        unit={unit}
+        onDecrease={decrease}
+        onIncrease={increase}
+        onAddMicro={addMicro}
+        onClearMicro={clearMicro}
+      />
+      <DumbbellRack weights={RACK_WEIGHTS_LB} selectedLb={weightLb} unit={unit} onSelect={selectWeight} />
     </div>
   )
 }

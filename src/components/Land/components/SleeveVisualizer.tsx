@@ -1,4 +1,4 @@
-import { formatPlateTag } from "../../../lib/units";
+import { formatPlateTag, lbToKg } from "../../../lib/units";
 import { useUnit } from "../../../store/useGymStore";
 import { Chip } from "../../shared/Chip";
 import { Icon } from "../../shared/Icon";
@@ -22,13 +22,13 @@ function PlateDisc({ weight }: { weight: PlateWeight }) {
       style={{ width: visual.width, height: visual.height }}
     >
       <span className="rotate-90 whitespace-nowrap font-bold text-micro leading-none tracking-tighter uppercase font-label-sm">
-        {formatPlateTag(weight, unit)}
+        {formatPlateTag(lbToKg(weight), unit)}
       </span>
     </div>
   );
 }
 
-function SleeveDetail({
+/* function SleeveDetail({
   title,
   detail,
   align,
@@ -51,12 +51,11 @@ function SleeveDetail({
       </span>
     </div>
   );
-}
+} */
 
 export function SleeveVisualizer({
   discs,
   knurlLabel,
-  sleeveDetail,
   onClear,
 }: SleeveVisualizerProps) {
   const leftDiscs = [...discs].reverse();

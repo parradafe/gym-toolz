@@ -1,7 +1,7 @@
 import { BARS } from '../components/Config/data'
 import type { BarConfig } from '../components/Config/types'
 import type { LoadCalculation, PlateWeight } from '../components/Land/types'
-import { LB_PER_KG } from '../lib/units'
+import { LB_PER_KG, lbToKg } from '../lib/units'
 import type { GymState } from './useGymStore'
 
 export const selectBars = (s: GymState): BarConfig[] => [...BARS, ...s.customBars]
@@ -19,8 +19,13 @@ export const selectBarKg = (s: GymState): number =>
   s.mode === 'barbell' ? (selectBars(s).find((b) => b.id === s.barId)?.kg ?? 0) : 0
 
 export const selectTotals = (s: GymState): LoadCalculation => {
+  if (s.mode === 'dumbbell') {
+    const { weightLb, microLb, isPair } = s.dumbbell
+    const totalKg = lbToKg(weightLb + microLb) * (isPair ? 2 : 1)
+    return { totalKg, totalLb: totalKg * LB_PER_KG, platesOnlyKg: 0, perSideKg: 0 }
+  }
   const perSideKg = (Object.entries(s.loaded) as [string, number][]).reduce(
-    (sum, [weight, count]) => sum + Number(weight) * count,
+    (sum, [weight, count]) => sum + lbToKg(Number(weight)) * count,
     0,
   )
   const platesOnlyKg = perSideKg * 2

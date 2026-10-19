@@ -1,5 +1,5 @@
 import { cx } from '../../../lib/cx'
-import { formatNumber, formatWeight, toUnit } from '../../../lib/units'
+import { formatNumber, formatWeight, lbToKg, toUnit } from '../../../lib/units'
 import { useUnit } from '../../../store/useGymStore'
 import type { FractionalPlateConfig } from '../types'
 
@@ -29,13 +29,13 @@ export function FractionalPlates({ plates, enabled, onChange }: FractionalPlates
                   plate.discClassName,
                 )}
               >
-                {formatNumber(toUnit(plate.weight, unit))}
+                {formatNumber(toUnit(lbToKg(plate.weight), unit))}
               </div>
-              <span className="font-label-md text-label-md font-bold">{formatWeight(plate.weight, unit)}</span>
+              <span className="font-label-md text-label-md font-bold">{formatWeight(lbToKg(plate.weight), unit)}</span>
             </div>
             <input
               type="checkbox"
-              aria-label={`Usar disco de ${formatWeight(plate.weight, unit)}`}
+              aria-label={`Usar disco de ${formatWeight(lbToKg(plate.weight), unit)}`}
               checked={enabled[plate.id]}
               onChange={(e) => onChange(plate.id, e.target.checked)}
               className="size-5 cursor-pointer"

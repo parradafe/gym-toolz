@@ -10,7 +10,9 @@ import {
 import type { BarConfig } from '../components/Config/types'
 import { EMPTY_PLATES, INITIAL_PLATES } from '../components/Land/data'
 import type { EquipmentMode, PlatesPerSide, PlateWeight } from '../components/Land/types'
+import { DEFAULT_PLATE_INDEX } from '../components/plates/data'
 import type { Unit } from '../components/shared/UnitSwitch'
+import { DEFAULT_DUMBBELL_LB } from '../components/dumbells/data'
 
 export const STORAGE_KEY = 'gym-toolz:v1'
 
@@ -26,7 +28,10 @@ interface GymData {
   plates: Record<string, PlateState>
   customBars: BarConfig[]
   barActive: Record<string, boolean>
-  cable: { step: string; ratio: string }
+  /** `step`/`ratio` are Config; `plateIndex`/`microKg` are the pin position in Land. */
+  cable: { step: string; ratio: string; plateIndex: number; microKg: number }
+  /** Land session. Weight is per dumbbell, in lb. */
+  dumbbell: { weightLb: number; microLb: number; isPair: boolean }
   /** Land session. */
   mode: EquipmentMode
   barId: string
@@ -42,6 +47,11 @@ interface GymActions {
   removeCustomBar: (id: string) => void
   setCableStep: (step: string) => void
   setCableRatio: (ratio: string) => void
+  setCablePlate: (plateIndex: number) => void
+  setCableMicro: (microKg: number) => void
+  setDumbbellWeight: (weightLb: number) => void
+  setDumbbellMicro: (microLb: number) => void
+  setDumbbellPair: (isPair: boolean) => void
   resetEquipment: () => void
   setMode: (mode: EquipmentMode) => void
   setBar: (id: string) => void
@@ -64,15 +74,21 @@ const defaultEquipment = () => ({
   plates: defaultPlates(),
   customBars: [] as BarConfig[],
   barActive: defaultBarActive(),
-  cable: { step: DEFAULT_CABLE_STEP, ratio: DEFAULT_CABLE_RATIO },
+  cable: {
+    step: DEFAULT_CABLE_STEP,
+    ratio: DEFAULT_CABLE_RATIO,
+    plateIndex: DEFAULT_PLATE_INDEX,
+    microKg: 0,
+  },
 })
 
 const initialData = (): GymData => ({
-  unit: 'KG',
+  unit: 'LBS',
   ...defaultEquipment(),
   mode: 'barbell',
   barId: BARS[0].id,
   loaded: { ...INITIAL_PLATES },
+  dumbbell: { weightLb: DEFAULT_DUMBBELL_LB, microLb: 0, isPair: true },
 })
 
 /**
@@ -148,10 +164,16 @@ export const useGymStore = create<GymState>()(
 
       setCableStep: (step) => set((s) => ({ cable: { ...s.cable, step } })),
       setCableRatio: (ratio) => set((s) => ({ cable: { ...s.cable, ratio } })),
+      setCablePlate: (plateIndex) => set((s) => ({ cable: { ...s.cable, plateIndex } })),
+      setCableMicro: (microKg) => set((s) => ({ cable: { ...s.cable, microKg } })),
+
+      setDumbbellWeight: (weightLb) => set((s) => ({ dumbbell: { ...s.dumbbell, weightLb } })),
+      setDumbbellMicro: (microLb) => set((s) => ({ dumbbell: { ...s.dumbbell, microLb } })),
+      setDumbbellPair: (isPair) => set((s) => ({ dumbbell: { ...s.dumbbell, isPair } })),
 
       resetEquipment: () =>
         set((s) => {
-          const next = { ...s, unit: 'KG' as Unit, ...defaultEquipment() }
+          const next = { ...s, unit: 'LBS' as Unit, ...defaultEquipment() }
           return { unit: next.unit, ...defaultEquipment(), ...reconcile(next) }
         }),
 
@@ -173,7 +195,7 @@ export const useGymStore = create<GymState>()(
     }),
     {
       name: STORAGE_KEY,
-      version: 1,
+      version: 2,
       storage: createJSONStorage(() => localStorage),
       partialize: ({
         unit,
@@ -184,7 +206,18 @@ export const useGymStore = create<GymState>()(
         mode,
         barId,
         loaded,
-      }): GymData => ({ unit, plates, customBars, barActive, cable, mode, barId, loaded }),
+        dumbbell,
+      }): GymData => ({
+        unit,
+        plates,
+        customBars,
+        barActive,
+        cable,
+        mode,
+        barId,
+        loaded,
+        dumbbell,
+      }),
       // Merge over defaults so ids added in later releases (new plates/bars) still exist.
       merge: (persisted, current) => {
         const p = (persisted ?? {}) as Partial<GymData>
@@ -195,11 +228,20 @@ export const useGymStore = create<GymState>()(
           barActive: { ...current.barActive, ...p.barActive },
           cable: { ...current.cable, ...p.cable },
           loaded: { ...current.loaded, ...p.loaded },
+          dumbbell: { ...current.dumbbell, ...p.dumbbell },
           customBars: Array.isArray(p.customBars) ? p.customBars : [],
         }
         return { ...merged, ...reconcile(merged) }
       },
-      migrate: (persisted) => persisted as GymData,
+      // v2: plate weights are keyed in lb, so drop plate config and loaded plates saved in kg.
+      migrate: (persisted, version) => {
+        const p = (persisted ?? {}) as Partial<GymData>
+        if (version < 2) {
+          delete p.plates
+          delete p.loaded
+        }
+        return p as GymData
+      },
     },
   ),
 )

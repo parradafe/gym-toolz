@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { cx } from '../../../lib/cx'
-import { formatWeight, toUnit } from '../../../lib/units'
+import { formatWeight, lbToKg, toUnit } from '../../../lib/units'
 import { useUnit } from '../../../store/useGymStore'
 import { Icon } from '../../shared/Icon'
 import { Stepper } from '../../shared/Stepper'
@@ -17,6 +17,7 @@ interface PlateRowProps {
 
 export function PlateRow({ plate, stock, enabled, onStockChange, onEnabledChange }: PlateRowProps) {
   const unit = useUnit()
+  const kg = lbToKg(plate.weight)
   const otherUnit = unit === 'KG' ? 'LBS' : 'KG'
   const [pulse, setPulse] = useState(false)
   const timer = useRef<ReturnType<typeof setTimeout>>(undefined)
@@ -36,7 +37,7 @@ export function PlateRow({ plate, stock, enabled, onStockChange, onEnabledChange
           <button
             type="button"
             title="Cambiar color"
-            aria-label={`Cambiar color del disco de ${formatWeight(plate.weight, unit)}`}
+            aria-label={`Cambiar color del disco de ${formatWeight(kg, unit)}`}
             onClick={handleColorClick}
             className={cx(
               'relative size-12 rounded-full flex items-center justify-center font-headline-sm text-headline-sm font-black comic-stroke-bold shadow-comic-sm active:translate-y-0.5 transition-transform',
@@ -44,7 +45,7 @@ export function PlateRow({ plate, stock, enabled, onStockChange, onEnabledChange
               pulse && 'scale-110',
             )}
           >
-            {Math.round(toUnit(plate.weight, unit))}
+            {Math.round(toUnit(kg, unit))}
             <span
               className={cx(
                 '-bottom-1 -right-1 absolute size-4 rounded-full flex items-center justify-center comic-stroke-thin shadow-comic-xs',
@@ -57,9 +58,9 @@ export function PlateRow({ plate, stock, enabled, onStockChange, onEnabledChange
           <div>
             <div className="flex items-center gap-1.5">
               <span className="font-headline-sm text-headline-sm text-on-surface uppercase font-black">
-                {formatWeight(plate.weight, unit)}
+                {formatWeight(kg, unit)}
               </span>
-              <span className="font-label-sm text-label-sm text-on-surface-variant">({formatWeight(plate.weight, otherUnit)})</span>
+              <span className="font-label-sm text-label-sm text-on-surface-variant">({formatWeight(kg, otherUnit)})</span>
             </div>
             <p className="font-body-sm text-body-sm text-on-surface-variant">{plate.name}</p>
           </div>
@@ -67,9 +68,9 @@ export function PlateRow({ plate, stock, enabled, onStockChange, onEnabledChange
         <div className="flex items-center gap-3">
           <div className="flex flex-col items-end">
             <span className="font-label-sm text-label-sm text-on-surface-variant uppercase">Pares</span>
-            <Stepper value={stock} onChange={onStockChange} label={`disco de ${formatWeight(plate.weight, unit)}`} />
+            <Stepper value={stock} onChange={onStockChange} label={`disco de ${formatWeight(kg, unit)}`} />
           </div>
-          <Toggle checked={enabled} onChange={onEnabledChange} label={`Usar disco de ${formatWeight(plate.weight, unit)}`} />
+          <Toggle checked={enabled} onChange={onEnabledChange} label={`Usar disco de ${formatWeight(kg, unit)}`} />
         </div>
       </div>
     </div>

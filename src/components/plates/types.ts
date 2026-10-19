@@ -1,5 +1,3 @@
-import type { Unit } from '../shared/UnitSwitch'
-
 export interface MicroOption {
   kg: number
   label: string
@@ -18,11 +16,4 @@ export interface CableLoad {
   rawKg: number
   /** Resistance felt at the handle. */
   effectiveKg: number
-}
-
-export interface CableTotalProps {
-  unit: Unit
-  onUnitChange: (unit: Unit) => void
-  load: CableLoad
-  ratio: CableRatio
 }

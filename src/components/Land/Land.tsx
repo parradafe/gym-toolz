@@ -4,12 +4,11 @@ import { HeroTotal } from "./components/HeroTotal";
 import { PlateControls } from "./components/PlateControls";
 import { SleeveVisualizer } from "./components/SleeveVisualizer";
 import { Dumbells } from "../dumbells/Dumbells";
-import { CableTotal } from "../plates/CableTotal";
 import { PlateTower } from "../plates/PlateTower";
 import { calcCableLoad } from "../plates/utils";
 import { EQUIPMENT_TABS, FRACTIONAL_PLATES, PLATE_CARDS } from "./data";
 import { useLoadCalculator } from "./useLoadCalculator";
-import { formatWeight } from "../../lib/units";
+import { formatWeight, toUnit } from "../../lib/units";
 import { describePlates, expandDiscs, getActivePlates } from "./utils";
 
 export function Land() {
@@ -63,38 +62,37 @@ export function Land() {
             onClear={calculator.clearPlates}
           />
         )}
-        {isCables ? (
-          <CableTotal
-            unit={unit}
-            onUnitChange={calculator.setUnit}
-            load={cableLoad}
-            ratio={calculator.cableRatio}
-          />
-        ) : (
-          <>
-            {!isDumbbell && (
-              <PlateControls
-                plateCards={PLATE_CARDS.filter((card) =>
-                  calculator.isListed(card.weight),
-                )}
-                fractionals={FRACTIONAL_PLATES.filter((f) =>
-                  calculator.isListed(f.weight),
-                )}
-                canAdd={calculator.canAdd}
-                plates={calculator.plates}
-                onAdd={calculator.addPlate}
-                onRemove={calculator.removePlate}
-              />
+        {!isCables && !isDumbbell && (
+          <PlateControls
+            plateCards={PLATE_CARDS.filter((card) =>
+              calculator.isListed(card.weight),
             )}
-            <HeroTotal
-              unit={unit}
-              onUnitChange={calculator.setUnit}
-              calc={calc}
-              isBarbell={isBarbell}
-              barKg={barKg}
-            />
-          </>
+            fractionals={FRACTIONAL_PLATES.filter((f) =>
+              calculator.isListed(f.weight),
+            )}
+            canAdd={calculator.canAdd}
+            plates={calculator.plates}
+            onAdd={calculator.addPlate}
+            onRemove={calculator.removePlate}
+          />
         )}
+        <HeroTotal
+          unit={unit}
+          onUnitChange={calculator.setUnit}
+          calc={
+            isCables
+              ? {
+                  totalKg: cableLoad.effectiveKg,
+                  totalLb: toUnit(cableLoad.effectiveKg, "LBS"),
+                  platesOnlyKg: 0,
+                  perSideKg: 0,
+                }
+              : calc
+          }
+          isBarbell={isBarbell}
+          barKg={barKg}
+          cable={isCables ? { load: cableLoad, ratio: calculator.cableRatio } : undefined}
+        />
 
         {/* <SessionActions onLogSet={calculator.openSavedModal} /> */}
       </div>

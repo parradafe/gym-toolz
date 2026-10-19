@@ -1,7 +1,9 @@
+import { useEffect, useState } from 'react'
 import { Chip } from '../../shared/Chip'
 import { Icon } from '../../shared/Icon'
+import type { CableLoad, CableRatio } from '../../plates/types'
 import type { LoadCalculation, Unit } from '../types'
-import { formatNumber, formatWeight, toUnit } from '../../../lib/units'
+import { formatBoth, formatNumber, formatWeight, toUnit } from '../../../lib/units'
 import { UnitSwitch } from '../../shared/UnitSwitch'
 
 interface HeroTotalProps {
@@ -10,10 +12,33 @@ interface HeroTotalProps {
   calc: LoadCalculation
   isBarbell: boolean
   barKg: number
+  /** Cable stack breakdown; replaces the bar/plates detail when set. */
+  cable?: { load: CableLoad; ratio: CableRatio }
 }
 
-export function HeroTotal({ unit, onUnitChange, calc, isBarbell, barKg }: HeroTotalProps) {
+const formatStack = (load: CableLoad, unit: Unit) =>
+  load.microKg > 0
+    ? `${formatWeight(load.stackKg, unit)} + ${formatWeight(load.microKg, unit)}`
+    : formatWeight(load.stackKg, unit)
+
+export function HeroTotal({ unit, onUnitChange, calc, isBarbell, barKg, cable }: HeroTotalProps) {
   const otherUnit: Unit = unit === 'KG' ? 'LBS' : 'KG'
+  const [copied, setCopied] = useState(false)
+
+  useEffect(() => {
+    if (!copied) return
+    const id = setTimeout(() => setCopied(false), 1800)
+    return () => clearTimeout(id)
+  }, [copied])
+
+  const copyTotal = async () => {
+    try {
+      await navigator.clipboard.writeText(formatBoth(calc.totalKg, unit))
+      setCopied(true)
+    } catch {
+      // Clipboard unavailable (insecure context or permission denied).
+    }
+  }
 
   return (
     <section className="px-margin pt-4 pb-2">
@@ -49,7 +74,11 @@ export function HeroTotal({ unit, onUnitChange, calc, isBarbell, barKg }: HeroTo
             <div className="flex items-center gap-1.5 min-w-0">
               <Icon name="scale" className="text-tertiary text-base" />
               <p className="font-body-sm text-body-sm truncate text-on-surface font-bold">
-                {isBarbell ? (
+                {cable ? (
+                  <>
+                    Torre: <span className="text-secondary">{formatStack(cable.load, unit)}</span>
+                  </>
+                ) : isBarbell ? (
                   <>
                     Barra: <span className="text-tertiary">{formatWeight(barKg, unit)}</span> + Discos:{' '}
                     <span className="text-secondary">{formatWeight(calc.platesOnlyKg, unit)}</span>
@@ -61,12 +90,26 @@ export function HeroTotal({ unit, onUnitChange, calc, isBarbell, barKg }: HeroTo
                 )}
               </p>
             </div>
-            {isBarbell && (
+            {cable && (
+              <Chip tone="tertiary" className="shrink-0">
+                Ratio {cable.ratio}:1
+              </Chip>
+            )}
+            {!cable && isBarbell && (
               <Chip tone="tertiary" className="shrink-0">
                 {formatWeight(calc.perSideKg, unit)} / lado
               </Chip>
             )}
           </div>
+          <button
+            type="button"
+            onClick={copyTotal}
+            aria-live="polite"
+            className="comic-press h-10 bg-surface text-on-surface rounded-lg comic-stroke shadow-comic-sm flex items-center justify-center gap-1.5 font-label-md text-label-md uppercase tracking-wider"
+          >
+            <Icon name={copied ? 'check' : 'content_copy'} className="text-secondary text-lg" />
+            {copied ? '¡Copiado!' : 'Copiar al portapapeles'}
+          </button>
         </div>
       </div>
     </section>

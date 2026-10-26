@@ -72,9 +72,9 @@
     scrollbar-width: none;
   }
 
-  /* Icon font (Material Symbols Outlined, loaded in index.html) */
+  /* Icon font (Material Symbols Outlined, self-hosted via @fontsource) */
   .material-symbols-outlined {
-    font-family: 'Material Symbols Outlined';
+    font-family: 'Material Symbols Outlined Variable';
     font-weight: 400;
     font-style: normal;
     font-size: 1.5rem;

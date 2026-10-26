@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Modal } from '../../shared/Modal'
 import { LB_PER_KG } from '../../../lib/units'
+import { MAX_BAR_KG, MAX_BAR_NAME_LENGTH, MIN_BAR_KG } from '../data'
 
 interface CustomBarModalProps {
   open: boolean
@@ -18,6 +19,7 @@ export function CustomBarModal({ open, onClose, onAdd }: CustomBarModalProps) {
   const [name, setName] = useState('')
   const [kg, setKg] = useState('')
   const [lbs, setLbs] = useState('')
+  const [error, setError] = useState('')
 
   const changeKg = (value: string) => {
     setKg(value)
@@ -31,12 +33,15 @@ export function CustomBarModal({ open, onClose, onAdd }: CustomBarModalProps) {
 
   const submit = () => {
     const weight = Number(kg)
-    if (name.trim() && weight > 0) {
-      onAdd(name.trim(), weight)
-      setName('')
-      setKg('')
-      setLbs('')
+    if (!name.trim() || !Number.isFinite(weight) || weight < MIN_BAR_KG || weight > MAX_BAR_KG) {
+      setError(`Indica un nombre y un peso entre ${MIN_BAR_KG} y ${MAX_BAR_KG} kg`)
+      return
     }
+    onAdd(name.trim(), weight)
+    setName('')
+    setKg('')
+    setLbs('')
+    setError('')
     onClose()
   }
 
@@ -51,6 +56,7 @@ export function CustomBarModal({ open, onClose, onAdd }: CustomBarModalProps) {
             id="custom-bar-name"
             type="text"
             value={name}
+            maxLength={MAX_BAR_NAME_LENGTH}
             onChange={(e) => setName(e.target.value)}
             placeholder="Ej: Barra Multipower Smith, Safety Squat"
             className={`${fieldClassName} font-body-md text-body-md`}
@@ -64,6 +70,9 @@ export function CustomBarModal({ open, onClose, onAdd }: CustomBarModalProps) {
             <input
               id="custom-bar-kg"
               type="number"
+              min={MIN_BAR_KG}
+              max={MAX_BAR_KG}
+              step="any"
               value={kg}
               onChange={(e) => changeKg(e.target.value)}
               placeholder="20.0"
@@ -77,6 +86,8 @@ export function CustomBarModal({ open, onClose, onAdd }: CustomBarModalProps) {
             <input
               id="custom-bar-lbs"
               type="number"
+              min={0}
+              step="any"
               value={lbs}
               onChange={(e) => changeLbs(e.target.value)}
               placeholder="44.0"
@@ -84,6 +95,11 @@ export function CustomBarModal({ open, onClose, onAdd }: CustomBarModalProps) {
             />
           </div>
         </div>
+        {error && (
+          <p role="alert" className="font-label-sm text-label-sm text-error">
+            {error}
+          </p>
+        )}
         <button
           type="button"
           onClick={submit}

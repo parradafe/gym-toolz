@@ -90,7 +90,7 @@
   --color-plate-green: #2e7d32;
 
   /* ── Typography: families ────────────────────── */
-  --font-display: 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Bricolage Grotesque Variable', ui-sans-serif, system-ui, sans-serif;
   --font-text: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
 
   /* Role aliases kept 1:1 with the raw HTML (font-headline-sm, font-label-sm…) */

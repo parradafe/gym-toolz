@@ -16,6 +16,9 @@ export const INITIAL_PLATES: PlatesPerSide = {
   2.5: 0,
 };
 
+/** Hard cap of discs of one weight per sleeve; guards rendering against absurd counts. */
+export const MAX_PLATES_PER_SIDE = 20
+
 export const EMPTY_PLATES: PlatesPerSide = {
   45: 0,
   35: 0,

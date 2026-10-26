@@ -4,14 +4,16 @@ import {
   BARS,
   DEFAULT_CABLE_STEP,
   FRACTIONAL_PLATES,
+  MAX_PLATE_STOCK,
   PLATES,
 } from '../components/Config/data'
 import type { BarConfig } from '../components/Config/types'
-import { EMPTY_PLATES, INITIAL_PLATES } from '../components/Land/data'
+import { EMPTY_PLATES, INITIAL_PLATES, MAX_PLATES_PER_SIDE } from '../components/Land/data'
 import type { EquipmentMode, PlatesPerSide, PlateWeight } from '../components/Land/types'
 import { DEFAULT_PLATE_INDEX } from '../components/plates/data'
 import type { Unit } from '../components/shared/UnitSwitch'
 import { DEFAULT_DUMBBELL_LB } from '../components/dumbells/data'
+import { sanitizeBarInput, sanitizePersisted } from './persistence'
 
 export const STORAGE_KEY = 'gym-toolz:v1'
 
@@ -21,7 +23,7 @@ export interface PlateState {
   stock?: number
 }
 
-interface GymData {
+export interface GymData {
   unit: Unit
   /** Keyed by plate weight as string ('25', '2.5'...). */
   plates: Record<string, PlateState>
@@ -101,7 +103,7 @@ function reconcile(s: GymData): Partial<GymData> {
   for (const key of Object.keys(loaded) as unknown as PlateWeight[]) {
     const plate = s.plates[String(key)]
     if (!plate?.enabled) loaded[key] = 0
-    else if (plate.stock !== undefined) loaded[key] = Math.min(loaded[key], plate.stock)
+    else loaded[key] = Math.min(loaded[key], plate.stock ?? MAX_PLATES_PER_SIDE, MAX_PLATES_PER_SIDE)
   }
   return { barId, loaded }
 }
@@ -118,7 +120,7 @@ export const useGymStore = create<GymState>()(
 
       setPlateStock: (id, stock) =>
         set((s) => {
-          const plates = { ...s.plates, [id]: { ...s.plates[id], stock: Math.max(0, stock) } }
+          const plates = { ...s.plates, [id]: { ...s.plates[id], stock: Math.min(MAX_PLATE_STOCK, Math.max(0, Math.trunc(stock) || 0)) } }
           return { plates, ...reconcile({ ...s, plates }) }
         }),
 
@@ -136,11 +138,13 @@ export const useGymStore = create<GymState>()(
 
       addCustomBar: (name, kg) =>
         set((s) => {
-          const id = `custom-${Date.now()}`
+          const input = sanitizeBarInput(name, kg)
+          if (!input) return s
+          const id = `custom-${crypto.randomUUID()}`
           const bar: BarConfig = {
             id,
-            kg,
-            name,
+            kg: input.kg,
+            name: input.name,
             icon: 'fitness_center',
             defaultActive: true,
             custom: true,
@@ -181,7 +185,7 @@ export const useGymStore = create<GymState>()(
         set((s) => {
           const plate = s.plates[String(weight)]
           if (!plate?.enabled) return s
-          if (plate.stock !== undefined && s.loaded[weight] >= plate.stock) return s
+          if (s.loaded[weight] >= Math.min(plate.stock ?? MAX_PLATES_PER_SIDE, MAX_PLATES_PER_SIDE)) return s
           return { loaded: { ...s.loaded, [weight]: s.loaded[weight] + 1 } }
         }),
 
@@ -217,7 +221,7 @@ export const useGymStore = create<GymState>()(
       }),
       // Merge over defaults so ids added in later releases (new plates/bars) still exist.
       merge: (persisted, current) => {
-        const p = (persisted ?? {}) as Partial<GymData>
+        const p = sanitizePersisted(persisted)
         const merged: GymState = {
           ...current,
           ...p,
@@ -237,7 +241,7 @@ export const useGymStore = create<GymState>()(
           delete p.plates
           delete p.loaded
         }
-        return p as GymData
+        return sanitizePersisted(p) as GymData
       },
     },
   ),

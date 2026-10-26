@@ -108,3 +108,11 @@ export const CALIBRATION_ROWS: CalibrationRow[] = [
 
 export const DEFAULT_CABLE_STEP = '5'
 export const TOAST_MS = 2400
+
+export const MAX_BAR_NAME_LENGTH = 40
+export const MIN_BAR_KG = 0.1
+export const MAX_BAR_KG = 500
+/** Upper bound for a plate's stock (pairs); also caps what a saved state can claim. */
+export const MAX_PLATE_STOCK = 50
+/** Upper bound for the cable micro-load, in kg. */
+export const MAX_MICRO_KG = 10

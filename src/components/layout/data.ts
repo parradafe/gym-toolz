@@ -34,9 +34,8 @@ export const PAGE_SUBTITLES: Record<string, string> = {
 
 export const HEADER = {
   title: "GYM TOOLZ",
-  logoAlt: "PowerPop Gym Logo",
-  logoSrc:
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuArl7twUr_DZ24LS8LA_q8K0bydpLK0kpwArHoKQTW9DRyudpOkFt23hyHPIoKCW2ryQpfIZCElbIJe7TKOAHTGNihtVdF6qGFOPi-Vn-JviXNFpS-Fuf0Zmq_EFtnEm-xA3HriT2rKlwR9D5Hkj7TUEssma-OnSU-t_wdx1Z98pizG8JGECaO6aMxUUTLbCUT7ErCTqj_apF8fPP7jVzqGLOGNSOeeCMDwHFn4SBQoLS5qud8UW69m8w",
+  logoAlt: "Gym Toolz logo",
+  logoSrc: "/logo.svg",
   avatarSrc:
     "https://lh3.googleusercontent.com/aida-public/AB6AXuBn1tIcD1dAXbGoeafgTxy1-pQl3zHaBglW42YEeeqfnCkjHgmtGceciKzmBjkE9CPt4M41nd69puht33eRw1__9c66WLp1-EnvevGJTwKW70CFVfZ-hUncPWRXWWBmNKp98kwdKZ1aDfwRRimMU7Z_EhmjZHXbtz9G3H3Wq1-PZuj3jkHt3hXpVQB6P_SahkDUIOmQEpB8Hjky5hQf_fNLfYm_9DBD8UztzZRYHrnuNGcmxkr4fiM1Zw",
 };
